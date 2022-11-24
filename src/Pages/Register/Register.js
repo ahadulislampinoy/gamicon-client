@@ -1,8 +1,10 @@
+import { RadioGroup } from "@headlessui/react";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { SaveUserToDb } from "../../Api/SaveUserToDb";
 import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
 
@@ -17,30 +19,17 @@ const Register = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [authError, setAuthError] = useState("");
   const [loading, setLoading] = useState(false);
+  let [plan, setPlan] = useState("buyer"); //This is for select buyer or seller
+  const [role, setRole] = useState("buyer");
 
   const onSubmit = (data) => {
     setAuthError("");
     setLoading(true);
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        updateProfile(data.name, data.image[0]);
-        toast.success("Registration successful");
-        setLoading(false);
-        reset();
-        setImgUrl("");
-      })
-      .catch((err) => {
-        setAuthError(err);
-        setLoading(false);
-      });
-  };
 
-  // update profile
-  const updateProfile = (name, image) => {
+    // // Add image to imgbb
     const imgbbKey = process.env.REACT_APP_imgbb_apiKey;
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", data.image[0]);
     fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
       method: "POST",
       body: formData,
@@ -48,12 +37,27 @@ const Register = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          updateUser(name, imgData.data.url)
+          // Create user
+          createUser(data.email, data.password)
             .then((result) => {
-              console.log("Name & Image Updated");
+              const user = result.user;
+              setLoading(false);
+              reset();
+              setImgUrl("");
+              // Update user
+              updateUser(data.name, imgData.data.display_url)
+                .then((result) => {
+                  console.log("User name, image added");
+                  toast.success("Registration successful");
+                  SaveUserToDb(user, role);
+                })
+                .catch((err) => {
+                  setAuthError(err);
+                });
             })
             .catch((err) => {
               setAuthError(err);
+              setLoading(false);
             });
         }
       });
@@ -65,6 +69,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Registration successful");
+        SaveUserToDb(user, "buyer");
       })
       .catch((err) => {
         setAuthError(err);
@@ -126,7 +131,9 @@ const Register = () => {
                       id="dropzone-file"
                       type="file"
                       class="hidden"
-                      onInputCapture={(e) => setImgUrl(e.target.value)}
+                      onInputCapture={(e) =>
+                        setImgUrl(e.target.value.slice(12))
+                      }
                       {...register("image", { required: true })}
                     />
                   </label>
@@ -170,10 +177,57 @@ const Register = () => {
                     <p className="text-red-500 mt-1">Password is required</p>
                   )}
                 </div>
+                <div>
+                  <RadioGroup value={plan} onChange={setPlan} className="mt-2">
+                    <RadioGroup.Label className="text-lg">
+                      Register as a
+                    </RadioGroup.Label>
+                    <div className="flex gap-2 my-3">
+                      <RadioGroup.Option
+                        onClick={(e) =>
+                          setRole(e.target.innerText.toLowerCase())
+                        }
+                        value="buyer"
+                        className="cursor-pointer"
+                      >
+                        {({ checked }) => (
+                          <span
+                            className={
+                              checked
+                                ? "bg-green-200 py-2 px-4 rounded font-medium"
+                                : "bg-gray-100 py-2 px-4 rounded"
+                            }
+                          >
+                            Buyer
+                          </span>
+                        )}
+                      </RadioGroup.Option>
+                      <RadioGroup.Option
+                        value="seller"
+                        className="cursor-pointer"
+                        onClick={(e) =>
+                          setRole(e.target.innerText.toLowerCase())
+                        }
+                      >
+                        {({ checked }) => (
+                          <span
+                            className={
+                              checked
+                                ? "bg-green-200 py-2 px-4 rounded font-medium"
+                                : "bg-gray-100 py-2 px-4 rounded"
+                            }
+                          >
+                            Seller
+                          </span>
+                        )}
+                      </RadioGroup.Option>
+                    </div>
+                  </RadioGroup>
+                </div>
                 {authError && (
                   <p className="text-red-500">{authError.message}</p>
                 )}
-                <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
+                <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-5 px-8 py-3">
                   {/* Register */}
                   {loading ? <SmallSpinner /> : "Register"}
                 </button>

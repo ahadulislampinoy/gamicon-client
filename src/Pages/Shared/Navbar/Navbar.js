@@ -1,11 +1,25 @@
 import { Transition } from "@headlessui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const { user, logOutUser } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOutUser()
+      .then((result) => {
+        toast.success("Logout successful");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   const navbarLinks = (
     <>
       <li className="text-gray-700 hover:text-green-600 text-xl">
@@ -20,10 +34,13 @@ const Navbar = () => {
       <li className="text-gray-700 hover:text-green-600 text-xl">
         <NavLink to="/blog">Blog</NavLink>
       </li>
-      {"user"?.email ? (
+      {user?.email ? (
         <>
           <li className="text-gray-700 hover:text-green-600 text-xl">
-            <button>Logout</button>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
+          <li className="text-gray-700 hover:text-green-600 text-xl">
+            <button onClick={handleLogOut}>Logout</button>
           </li>
         </>
       ) : (

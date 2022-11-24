@@ -2,6 +2,7 @@ import { default as React, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { SaveUserToDb } from "../../Api/SaveUserToDb";
 import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
 
@@ -34,6 +35,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login successful");
+        SaveUserToDb(user, "buyer");
       })
       .catch((err) => {
         setAuthError(err);
