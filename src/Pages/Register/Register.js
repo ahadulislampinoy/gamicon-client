@@ -1,28 +1,38 @@
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const [imgUrl, setImgUrl] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
-    // console.log(data.image[0]);
-    // Create user
+    setAuthError("");
+    setLoading(true);
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         updateProfile(data.name, data.image[0]);
+        toast.success("Registration successful");
+        setLoading(false);
+        reset();
+        setImgUrl("");
       })
       .catch((err) => {
-        console.log(err);
+        setAuthError(err);
+        setLoading(false);
       });
   };
 
@@ -30,7 +40,7 @@ const Register = () => {
   const updateProfile = (name, image) => {
     const imgbbKey = process.env.REACT_APP_imgbb_apiKey;
     const formData = new FormData();
-    formData.append("img", image);
+    formData.append("image", image);
     fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
       method: "POST",
       body: formData,
@@ -40,10 +50,10 @@ const Register = () => {
         if (imgData.success) {
           updateUser(name, imgData.data.url)
             .then((result) => {
-              console.log("Updated");
+              console.log("Name & Image Updated");
             })
             .catch((err) => {
-              console.log(err);
+              setAuthError(err);
             });
         }
       });
@@ -54,10 +64,10 @@ const Register = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        toast.success("Registration successful");
       })
       .catch((err) => {
-        console.log(err);
+        setAuthError(err);
       });
   };
 
@@ -69,109 +79,110 @@ const Register = () => {
             Register
           </h2>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            class="max-w-lg border rounded-lg mx-auto"
-          >
+          <div class="max-w-lg border rounded-lg mx-auto">
             <div class="flex flex-col gap-4 p-4 md:p-8">
-              <div>
-                <label
-                  for="name"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  name="name"
-                  type="text"
-                  {...register("name", { required: true })}
-                  placeholder="Enter name"
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
-                />
-                {errors?.name && (
-                  <p className="text-red-500 mt-1">Name is required</p>
-                )}
-              </div>
-              <div>
-                <label
-                  for="name"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Profile Photo
-                </label>
-                <label
-                  for="dropzone-file"
-                  class="flex items-center  bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2 cursor-pointer"
-                >
-                  <h2 class="text-gray-500 overflow-hidden">
-                    {imgUrl ? (
-                      imgUrl
-                    ) : (
-                      <>
-                        Choose photo
-                        <ArrowUpTrayIcon className="h-4 w-4 ml-1 inline-block" />
-                      </>
-                    )}
-                  </h2>
-
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <label
+                    for="name"
+                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                  >
+                    Name
+                  </label>
                   <input
-                    id="dropzone-file"
-                    type="file"
-                    class="hidden"
-                    onInputCapture={(e) => setImgUrl(e.target.value)}
-                    {...register("image", { required: true })}
+                    name="name"
+                    type="text"
+                    {...register("name", { required: true })}
+                    placeholder="Enter name"
+                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                   />
-                </label>
-                {errors?.image && (
-                  <p className="text-red-500 mt-1">Photo is required</p>
-                )}
-              </div>
-              <div>
-                <label
-                  for="email"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Enter email"
-                  {...register("email", { required: true })}
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
-                />
-                {errors?.email && (
-                  <p className="text-red-500 mt-1">Email is required</p>
-                )}
-              </div>
+                  {errors?.name && (
+                    <p className="text-red-500 mt-1">Name is required</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="name"
+                    class="inline-block text-gray-800 text-sm sm:text-base mt-3 mb-1"
+                  >
+                    Profile Photo
+                  </label>
+                  <label
+                    for="dropzone-file"
+                    class="flex items-center  bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2 cursor-pointer"
+                  >
+                    <h2 class="text-gray-500 overflow-hidden">
+                      {imgUrl ? (
+                        imgUrl
+                      ) : (
+                        <>
+                          Choose photo
+                          <ArrowUpTrayIcon className="h-4 w-4 ml-1 inline-block" />
+                        </>
+                      )}
+                    </h2>
 
-              <div>
-                <label
-                  for="password"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Password
-                </label>
-                <input
-                  name="password"
-                  type="password"
-                  {...register("password", { required: true })}
-                  placeholder="Enter password"
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
-                />
-                {errors?.password && (
-                  <p className="text-red-500 mt-1">Password is required</p>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      class="hidden"
+                      onInputCapture={(e) => setImgUrl(e.target.value)}
+                      {...register("image", { required: true })}
+                    />
+                  </label>
+                  {errors?.image && (
+                    <p className="text-red-500 mt-1">Photo is required</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                  >
+                    Email
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Enter email"
+                    {...register("email", { required: true })}
+                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                  />
+                  {errors?.email && (
+                    <p className="text-red-500 mt-1">Email is required</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="password"
+                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                  >
+                    Password
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    {...register("password", { required: true })}
+                    placeholder="Enter password"
+                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                  />
+                  {errors?.password && (
+                    <p className="text-red-500 mt-1">Password is required</p>
+                  )}
+                </div>
+                {authError && (
+                  <p className="text-red-500">{authError.message}</p>
                 )}
-              </div>
-
-              <button class="block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
-                Register
-              </button>
+                <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
+                  {/* Register */}
+                  {loading ? <SmallSpinner /> : "Register"}
+                </button>
+              </form>
 
               <div class="flex justify-center items-center relative">
                 <span class="h-px bg-gray-300 absolute inset-x-0"></span>
                 <span class="bg-white text-gray-400 text-sm relative px-4">
-                  Log in with social
+                  Register with social
                 </span>
               </div>
 
@@ -219,7 +230,7 @@ const Register = () => {
                 </Link>
               </p>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

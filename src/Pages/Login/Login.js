@@ -1,7 +1,45 @@
-import React from "react";
+import { default as React, useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import SmallSpinner from "../../components/Loader/SmallSpinner";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { loginUser, googleSignIn, loading } = useContext(AuthContext);
+  const [authError, setAuthError] = useState("");
+
+  const onSubmit = (data) => {
+    setAuthError("");
+    loginUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        toast.success("Login successful");
+        reset();
+      })
+      .catch((err) => {
+        setAuthError(err);
+      });
+  };
+
+  // Google signin
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        toast.success("Login successful");
+      })
+      .catch((err) => {
+        setAuthError(err);
+      });
+  };
+
   return (
     <div>
       <div class="bg-white py-6 sm:py-8 lg:py-12">
@@ -10,41 +48,53 @@ const Login = () => {
             Login
           </h2>
 
-          <form class="max-w-lg border rounded-lg mx-auto shadow">
+          <div class="max-w-lg border rounded-lg mx-auto">
             <div class="flex flex-col gap-4 p-4 md:p-8">
-              <div>
-                <label
-                  for="email"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  name="email"
-                  placeholder="Enter email"
-                  type="email"
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="password"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                >
-                  Password
-                </label>
-                <input
-                  name="password"
-                  placeholder="Enter password"
-                  type="password"
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
-                />
-              </div>
-
-              <button class="block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
-                Log in
-              </button>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <label
+                    for="email"
+                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                  >
+                    Email
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Enter email"
+                    {...register("email", { required: true })}
+                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                  />
+                  {errors?.email && (
+                    <p className="text-red-500 mt-1">Email is required</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="password"
+                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                  >
+                    Password
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    {...register("password", { required: true })}
+                    placeholder="Enter password"
+                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                  />
+                  {errors?.password && (
+                    <p className="text-red-500 mt-1">Password is required</p>
+                  )}
+                </div>
+                {authError && (
+                  <p className="text-red-500">{authError.message}</p>
+                )}
+                <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
+                  {/* Register */}
+                  {loading ? <SmallSpinner /> : "Register"}
+                </button>
+              </form>
 
               <div class="flex justify-center items-center relative">
                 <span class="h-px bg-gray-300 absolute inset-x-0"></span>
@@ -53,7 +103,10 @@ const Login = () => {
                 </span>
               </div>
 
-              <button class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-100 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+              <button
+                onClick={handleGoogleSignIn}
+                class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-100 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+              >
                 <svg
                   class="w-5 h-5 shrink-0"
                   width="24"
@@ -94,7 +147,7 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
