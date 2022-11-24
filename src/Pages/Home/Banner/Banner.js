@@ -30,26 +30,18 @@ const Banner = () => {
             <div class="grid grid-cols-2 md:flex md:divide-x gap-4 -mx-6 md:-mx-8">
               <div class="px-6 md:px-8">
                 <span class="block text-green-600 text-lg md:text-xl font-bold text-center md:text-left">
-                  200
+                  1M+
                 </span>
                 <span class="block text-gray-800 text-sm md:text-base font-semibold text-center md:text-left">
-                  People
+                  Products Sold
                 </span>
               </div>
 
               <div class="px-6 md:px-8">
                 <span class="block text-green-600 text-lg md:text-xl font-bold text-center md:text-left">
-                  500+
+                  100k+
                 </span>
-                <span class="block text-gray-800 text-sm md:text-base font-semibold text-center md:text-left">
-                  Projects
-                </span>
-              </div>
 
-              <div class="px-6 md:px-8">
-                <span class="block text-green-600 text-lg md:text-xl font-bold text-center md:text-left">
-                  250+
-                </span>
                 <span class="block text-gray-800 text-sm md:text-base font-semibold text-center md:text-left">
                   Customers
                 </span>
@@ -57,10 +49,10 @@ const Banner = () => {
 
               <div class="px-6 md:px-8">
                 <span class="block text-green-600 text-lg md:text-xl font-bold text-center md:text-left">
-                  A couple
+                  1k+
                 </span>
                 <span class="block text-gray-800 text-sm md:text-base font-semibold text-center md:text-left">
-                  Coffee breaks
+                  Sales Per Day
                 </span>
               </div>
             </div>
