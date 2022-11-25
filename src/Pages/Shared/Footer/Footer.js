@@ -1,33 +1,34 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div>
-      <div class="bg-white pt-5">
-        <footer class="max-w-screen-2xl mx-auto">
-          <div class="flex flex-col md:flex-row justify-between items-center border-t border-b gap-4 px-8 lg:px-14 py-6">
-            <nav class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
-              <a href="#" class="text-gray-700 font-medium">
+      <div className="bg-white pt-5">
+        <footer className="max-w-screen-2xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center border-t border-b gap-4 px-8 lg:px-14 py-6">
+            <nav className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
+              <Link to="/" className="text-gray-700 font-medium">
                 Home
-              </a>
-              <a href="#" class="text-gray-700 font-medium">
+              </Link>
+              <a href="#" className="text-gray-700 font-medium">
                 Products
               </a>
-              <a href="#" class="text-gray-700 font-medium">
+              <a href="#" className="text-gray-700 font-medium">
                 FAQ
               </a>
-              <a href="#" class="text-gray-700 font-medium">
+              <a href="#" className="text-gray-700 font-medium">
                 Contact
               </a>
-              <a href="#" class="text-gray-700 font-medium">
+              <Link to="/blog" className="text-gray-700 font-medium">
                 Blog
-              </a>
+              </Link>
             </nav>
 
-            <div class="flex gap-4">
-              <a href="#" target="_blank" class="text-gray-600">
+            <div className="flex gap-4">
+              <a href="#" target="_blank" className="text-gray-600">
                 <svg
-                  class="w-5 h-5"
+                  className="w-5 h-5"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -38,9 +39,9 @@ const Footer = () => {
                 </svg>
               </a>
 
-              <a href="#" target="_blank" class="text-gray-600">
+              <a href="#" target="_blank" className="text-gray-600">
                 <svg
-                  class="w-5 h-5"
+                  className="w-5 h-5"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -51,9 +52,9 @@ const Footer = () => {
                 </svg>
               </a>
 
-              <a href="#" target="_blank" class="text-gray-600">
+              <a href="#" target="_blank" className="text-gray-600">
                 <svg
-                  class="w-5 h-5"
+                  className="w-5 h-5"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -66,7 +67,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div class="text-gray-700 font-medium text-center py-8">
+          <div className="text-gray-700 font-medium text-center py-8">
             All rights reserved - Gamicon {new Date().getFullYear()}
           </div>
         </footer>

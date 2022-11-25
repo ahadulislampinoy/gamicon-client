@@ -1,10 +1,9 @@
 import { Transition } from "@headlessui/react";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import "./Navbar.module.css";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -23,21 +22,16 @@ const Navbar = () => {
   const navbarLinks = (
     <>
       <li className="text-gray-700 hover:text-green-600 text-xl">
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : undefined)}
-          to="/home"
-        >
-          Home
-        </NavLink>
+        <Link to="/home">Home</Link>
       </li>
 
       <li className="text-gray-700 hover:text-green-600 text-xl">
-        <NavLink to="/blog">Blog</NavLink>
+        <Link to="/blog">Blog</Link>
       </li>
       {user?.email ? (
         <>
           <li className="text-gray-700 hover:text-green-600 text-xl">
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className="text-gray-700 hover:text-green-600 text-xl">
             <button onClick={handleLogOut}>Logout</button>
@@ -45,7 +39,7 @@ const Navbar = () => {
         </>
       ) : (
         <li className="text-gray-700 hover:text-green-600 text-xl">
-          <NavLink to="/login">Login</NavLink>
+          <Link to="/login">Login</Link>
         </li>
       )}
     </>

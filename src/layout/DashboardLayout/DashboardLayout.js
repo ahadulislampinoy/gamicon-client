@@ -14,65 +14,83 @@ const DashboardLayout = () => {
       {loading ? (
         <LargeSpinner height={"h-screen"} />
       ) : (
-        <div class="flex items-center justify-center h-screen bg-gray-100">
-          <div class="grid grid-cols-1 sm:grid-cols-3 w-screen h-screen">
-            <div class="m-4 flex flex-col justify-between rounded-xl bg-white p-4 sm:p-8">
-              <ul class="space-y-3">
-                <li class="flex justify-center font-medium text-2xl text-gray-700 p-3 rounded-lg">
+        <div className="flex items-center justify-center h-screen bg-gray-100">
+          <div className="grid grid-cols-1 sm:grid-cols-3 w-screen h-screen">
+            <div className="m-4 flex flex-col justify-between rounded-xl bg-white p-4 sm:p-8">
+              <ul className="space-y-3">
+                <li className="flex justify-center font-medium text-2xl text-gray-700 p-3 rounded-lg">
                   __<span className="capitalize">{role}</span>__
                 </li>
-                <li class="w-full font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100 inline-block">
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  <li className="w-full font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100 inline-block">
                     Home
-                  </NavLink>
-                </li>
-                {role === "buyer" && (
-                  <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                    <NavLink to="/dashboard/myorders"> My orders</NavLink>
                   </li>
-                )}
+                </NavLink>
+                <NavLink
+                  to="/dashboard/myorders"
+                  className="inline-block w-full"
+                >
+                  <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
+                    My orders
+                  </li>
+                </NavLink>
                 {role === "seller" && (
                   <>
-                    <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      <NavLink to="/dashboard/myproducts"> My products</NavLink>
-                    </li>
-                    <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      <NavLink
-                        to="/dashboard/addproduct"
-                        className={({ isActive }) =>
-                          isActive ? "active" : undefined
-                        }
-                      >
+                    <NavLink
+                      to="/dashboard/myproducts"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
+                        My products
+                      </li>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/addproduct"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
                         Add a product
-                      </NavLink>
-                    </li>
+                      </li>
+                    </NavLink>
                   </>
                 )}
                 {role === "admin" && (
                   <>
-                    <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      <NavLink to="/dashboard/allbuyers"> All buyers</NavLink>
-                    </li>
-                    <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      <NavLink to="/dashboard/allsellers"> All sellers</NavLink>
-                    </li>
-                    <li class="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      <NavLink to="/dashboard/reporteditems">
-                        {" "}
+                    <NavLink
+                      to="/dashboard/allbuyers"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
+                        All buyers
+                      </li>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/allsellers"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
+                        All sellers
+                      </li>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/reporteditems"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
                         Reported items
-                      </NavLink>
-                    </li>
+                      </li>
+                    </NavLink>
                   </>
                 )}
               </ul>
             </div>
 
-            <div class="m-4 col-span-1 sm:col-span-2 p-2 sm:p-6 bg-white rounded-xl flex justify-start">
+            <div className="m-4 col-span-1 sm:col-span-2 p-2 sm:p-6 bg-white rounded-xl flex justify-start">
               <Outlet />
             </div>
           </div>

@@ -3,6 +3,7 @@ import DashboardLayout from "../layout/DashboardLayout/DashboardLayout";
 import Main from "../layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import Category from "../Pages/Category/Category";
+import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
 import MyProducts from "../Pages/Dashboard/Seller/MyProducts/MyProducts";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
     element: <DashboardLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/dashboard", element: <DashboardLayout /> },
+      { path: "/dashboard/myorders", element: <MyOrders /> },
       { path: "/dashboard/addproduct", element: <AddProduct /> },
       { path: "/dashboard/myproducts", element: <MyProducts /> },
     ],

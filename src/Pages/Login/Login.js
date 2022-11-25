@@ -44,19 +44,19 @@ const Login = () => {
 
   return (
     <div>
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-          <h2 class="text-gray-800 text-3xl lg:text-4xl font-bold text-center mb-4 md:mb-8">
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
+          <h2 className="text-gray-800 text-3xl lg:text-4xl font-bold text-center mb-4 md:mb-8">
             Login
           </h2>
 
-          <div class="max-w-lg border rounded-lg mx-auto">
-            <div class="flex flex-col gap-4 p-4 md:p-8">
+          <div className="max-w-lg border rounded-lg mx-auto">
+            <div className="flex flex-col gap-4 p-4 md:p-8">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
                     for="email"
-                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                    className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Email
                   </label>
@@ -65,7 +65,7 @@ const Login = () => {
                     type="email"
                     placeholder="Enter email"
                     {...register("email", { required: true })}
-                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                   />
                   {errors?.email && (
                     <p className="text-red-500 mt-1">Email is required</p>
@@ -74,7 +74,7 @@ const Login = () => {
                 <div>
                   <label
                     for="password"
-                    class="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
+                    className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Password
                   </label>
@@ -83,7 +83,7 @@ const Login = () => {
                     type="password"
                     {...register("password", { required: true })}
                     placeholder="Enter password"
-                    class="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
+                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                   />
                   {errors?.password && (
                     <p className="text-red-500 mt-1">Password is required</p>
@@ -92,25 +92,25 @@ const Login = () => {
                 {authError && (
                   <p className="text-red-500">{authError.message}</p>
                 )}
-                <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
+                <button className="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
                   {/* Register */}
                   {loading ? <SmallSpinner /> : "Login"}
                 </button>
               </form>
 
-              <div class="flex justify-center items-center relative">
-                <span class="h-px bg-gray-300 absolute inset-x-0"></span>
-                <span class="bg-white text-gray-400 text-sm relative px-4">
+              <div className="flex justify-center items-center relative">
+                <span className="h-px bg-gray-300 absolute inset-x-0"></span>
+                <span className="bg-white text-gray-400 text-sm relative px-4">
                   Log in with social
                 </span>
               </div>
 
               <button
                 onClick={handleGoogleSignIn}
-                class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-100 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+                className="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-100 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
               >
                 <svg
-                  class="w-5 h-5 shrink-0"
+                  className="w-5 h-5 shrink-0"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -138,12 +138,12 @@ const Login = () => {
               </button>
             </div>
 
-            <div class="flex justify-center items-center bg-gray-100 p-4">
-              <p class="text-gray-500 text-sm text-center">
+            <div className="flex justify-center items-center bg-gray-100 p-4">
+              <p className="text-gray-500 text-sm text-center">
                 Don't have an account?{" "}
                 <Link
                   to="/register"
-                  class="text-gray-500 hover:text-gray-600 active:text-gray-700 transition duration-100"
+                  className="text-gray-500 hover:text-gray-600 active:text-gray-700 transition duration-100"
                 >
                   Register
                 </Link>
