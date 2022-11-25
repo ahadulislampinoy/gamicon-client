@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import "./Navbar.css";
+import "./Navbar.module.css";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);

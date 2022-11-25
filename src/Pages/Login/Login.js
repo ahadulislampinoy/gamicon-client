@@ -94,7 +94,7 @@ const Login = () => {
                 )}
                 <button class="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
                   {/* Register */}
-                  {loading ? <SmallSpinner /> : "Register"}
+                  {loading ? <SmallSpinner /> : "Login"}
                 </button>
               </form>
 
