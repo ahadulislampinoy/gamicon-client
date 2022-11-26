@@ -14,7 +14,7 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
     formState: { errors },
   } = useForm();
   const { user } = useContext(AuthContext);
-  const { productName, resellPrice } = productData;
+  const { productName, resellPrice, salesStatus, productImage } = productData;
 
   const onSubmit = (data) => {
     const bookingDetails = {
@@ -23,6 +23,8 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
       productName,
       resellPrice,
       location: data.location,
+      salesStatus,
+      productImage,
       phoneNumber: data.phoneNumber,
     };
     axios.post(`http://localhost:5000/bookings`, bookingDetails).then((res) => {

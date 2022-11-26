@@ -131,7 +131,6 @@ const Category = () => {
                       disabled={
                         role === "admin" || role === "seller" ? true : false
                       }
-                      // disabled={}
                       class="bg-gradient-to-r from-emerald-700 to-green-600 text-white text-sm md:text-base font-semibold text-center rounded-lg px-6 py-3"
                     >
                       {role === "admin" || role === "seller"
