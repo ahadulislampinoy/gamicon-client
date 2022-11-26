@@ -15,6 +15,7 @@ const Categories = () => {
     });
   }, []);
 
+  console.log(categories);
   return (
     <div className="bg-white justify-between px-8 lg:px-14 py-14 mx-auto">
       <div className="max-w-screen-2xl">

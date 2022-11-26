@@ -62,19 +62,19 @@ const DashboardLayout = () => {
                 {role === "admin" && (
                   <>
                     <NavLink
-                      to="/dashboard/allbuyers"
+                      to="/dashboard/allbuyer"
                       className="inline-block w-full"
                     >
                       <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                        All buyers
+                        All buyer
                       </li>
                     </NavLink>
                     <NavLink
-                      to="/dashboard/allsellers"
+                      to="/dashboard/allseller"
                       className="inline-block w-full"
                     >
                       <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                        All sellers
+                        All seller
                       </li>
                     </NavLink>
                     <NavLink

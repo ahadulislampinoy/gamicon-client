@@ -10,6 +10,16 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 const AddProduct = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Get current time start
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const dateTime = date + " " + time;
+  // Get current time end
+
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const {
@@ -38,10 +48,12 @@ const AddProduct = () => {
             condition: data.condition,
             originialPrice: data.originialPrice,
             resellPrice: data.resellPrice,
-            purchaseYear: data.purchaseYear,
+            yearsOfUse: data.yearsOfUse,
+            phoneNumber: data.phoneNumber,
             description: data.description,
             location: data.location,
             sellerName: user?.displayName,
+            postedTime: dateTime,
             sellerEmail: user?.email,
             salesStatus: "available",
             advertised: false,
@@ -87,9 +99,9 @@ const AddProduct = () => {
                 {...register("category")}
               >
                 <option value="01" selected>
-                  Play station
+                  Xbox
                 </option>
-                <option value="02">Xbox</option>
+                <option value="02">Play station</option>
                 <option value="03">Nintendo</option>
               </select>
             </div>
@@ -214,15 +226,15 @@ const AddProduct = () => {
 
             <div>
               <label className="inline-block text-gray-800 text-sm sm:text-base mb-2">
-                Purchase year
+                Years of use
               </label>
               <input
-                placeholder="Enter purchase year"
+                placeholder="Enter how many year of used"
                 type="number"
-                {...register("purchaseYear", { required: true })}
+                {...register("yearsOfUse", { required: true })}
                 className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
               />{" "}
-              {errors?.purchaseYear && (
+              {errors?.yearsOfUse && (
                 <p className="text-red-500 mt-1">Purchase year is required</p>
               )}
             </div>

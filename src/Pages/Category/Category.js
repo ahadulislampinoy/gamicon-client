@@ -1,11 +1,22 @@
 import { CheckCircleIcon, FlagIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import BookingModal from "./BookingModal";
 
 const Category = () => {
   const products = useLoaderData();
+  let [isOpen, setIsOpen] = useState(false);
+  const [productData, setProductData] = useState("");
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const handleReport = (id) => {
     axios.patch(`http://localhost:5000/report/${id}`).then((res) => {
@@ -21,7 +32,7 @@ const Category = () => {
       {products.map((product) => (
         <div key={product._id}>
           <div class="max-w-screen-lg mx-auto">
-            <div class="">
+            <div>
               <div class="space-y-4">
                 <div class="bg-gray-100 rounded-lg overflow-hidden relative">
                   <img
@@ -33,7 +44,7 @@ const Category = () => {
               </div>
 
               <div class="py-6">
-                <div className="grid grid-cols-3 sm:grid-cols-5 justify-center">
+                <div className="grid grid-cols-3 sm:grid-cols-4 justify-center">
                   <div class="mb-2 md:mb-3">
                     <span class="inline-block text-xl text-gray-800 mb-0.5 font-semibold capitalize">
                       {product.sellerName}
@@ -41,7 +52,7 @@ const Category = () => {
                         <CheckCircleIcon className="inline-block w-5 h-5 ml-1 text-blue-500" />
                       )}
                     </span>
-                    <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold capitalize">
+                    <h2 class="text-gray-800 text-2xl font-bold capitalize">
                       {product.productName}
                     </h2>
                   </div>
@@ -62,23 +73,42 @@ const Category = () => {
                   </div>
                   <div class="mb-4 md:mb-6">
                     <span class="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
-                      Purchase year
+                      Years of use
                     </span>
                     <div className="text-xl font-bold capitalize">
-                      {product.purchaseYear}
+                      {product.yearsOfUse}
                     </div>
                   </div>
                   <div class="mb-4 md:mb-6">
                     <span class="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
-                      Then & Now
+                      Originial price
                     </span>
-                    <div>
-                      <span class="text-gray-800 text-xl md:text-2xl font-bold">
-                        ${product.resellPrice}
-                      </span>
-                      <span class="text-red-500 line-through mb-0.5">
-                        ${product.originialPrice}
-                      </span>
+                    <div className="text-xl font-bold capitalize">
+                      ${product.originialPrice}
+                    </div>
+                  </div>
+                  <div class="mb-4 md:mb-6">
+                    <span class="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
+                      Resell price
+                    </span>
+                    <div className="text-xl font-bold capitalize">
+                      ${product.resellPrice}
+                    </div>
+                  </div>
+                  <div class="mb-4 md:mb-6">
+                    <span class="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
+                      Phone number
+                    </span>
+                    <div className="text-xl font-bold capitalize">
+                      {product.phoneNumber}
+                    </div>
+                  </div>
+                  <div class="mb-4 md:mb-6">
+                    <span class="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
+                      Product views
+                    </span>
+                    <div className="text-xl font-bold capitalize">
+                      {parseInt(product.originialPrice / 5)}
                     </div>
                   </div>
                 </div>
@@ -90,34 +120,38 @@ const Category = () => {
                     <p class="text-gray-500">{product.description}</p>
                   </div>
                   <div class="flex gap-2.5 md:justify-end">
-                    <button class="bg-gradient-to-r from-emerald-700 to-green-600 text-white text-sm md:text-base font-semibold text-center rounded-lg px-6 py-3">
+                    <button
+                      onClick={() => {
+                        openModal();
+                        setProductData(product);
+                      }}
+                      class="bg-gradient-to-r from-emerald-700 to-green-600 text-white text-sm md:text-base font-semibold text-center rounded-lg px-6 py-3"
+                    >
                       Buy now
                     </button>
-
-                    {product.report ? (
-                      <button
-                        disabled
-                        class="inline-block bg-gray-200 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
-                      >
-                        Reported
-                        <FlagIcon className="inline-block w-5 h-5 ml-1 text-green-500" />
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleReport(product._id)}
-                        class="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
-                      >
-                        Report
-                        <FlagIcon className="inline-block w-5 h-5 ml-1 text-red-500" />
-                      </button>
-                    )}
+                    <button
+                      onClick={() => handleReport(product._id)}
+                      class="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
+                    >
+                      Report
+                      <FlagIcon className="inline-block w-5 h-5 ml-1 text-red-500" />
+                    </button>
                   </div>
+                  <h1> </h1>
+                  <h1 className="text-end text-gray-600 text-sm font-medium">
+                    Posted on: {product.postedTime}
+                  </h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       ))}
+      <BookingModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        productData={productData}
+      />
     </div>
   );
 };
