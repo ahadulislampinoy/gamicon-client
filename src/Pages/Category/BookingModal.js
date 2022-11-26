@@ -1,26 +1,25 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const BookingModal = ({ isOpen, closeModal, productData }) => {
-  const { register, handleSubmit, reset } = useForm();
-
   const {
-    productName,
-    location,
-    sellerName,
-    sellerEmail,
-    phoneNumber,
-    resellPrice,
-  } = productData;
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { user } = useContext(AuthContext);
+  const { productName, resellPrice } = productData;
 
   const onSubmit = (data) => {
     const bookingDetails = {
-      sellerName,
-      sellerEmail,
+      buyerName: user?.displayName,
+      buyerEmail: user?.email,
       productName,
       resellPrice,
       location: data.location,
@@ -83,7 +82,7 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
                     <input
                       name="sellerName"
                       type="text"
-                      defaultValue={sellerName}
+                      defaultValue={user?.displayName}
                       readOnly
                       {...register("sellerName")}
                       placeholder="Enter name"
@@ -101,9 +100,9 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
                     <input
                       name="email"
                       type="email"
-                      defaultValue={sellerEmail}
+                      defaultValue={user?.email}
                       readOnly
-                      {...register("sellerEmail")}
+                      {...register("buyerEmail")}
                       placeholder="Enter email"
                       className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                     />
@@ -143,11 +142,15 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
                     <input
                       name="number"
                       type="text"
-                      defaultValue={phoneNumber}
-                      {...register("phoneNumber")}
-                      placeholder="Enter price"
+                      {...register("phoneNumber", { required: true })}
+                      placeholder="Enter your phone number"
                       className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                     />
+                    {errors?.phoneNumber && (
+                      <p className="text-red-500 mt-1">
+                        Phone number is required
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1">
@@ -156,11 +159,13 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
                     <input
                       name="location"
                       type="text"
-                      defaultValue={location}
-                      {...register("location")}
-                      placeholder="Enter price"
+                      {...register("location", { required: true })}
+                      placeholder="Enter your location"
                       className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                     />
+                    {errors?.location && (
+                      <p className="text-red-500 mt-1">Location is required</p>
+                    )}
                   </div>
 
                   <div>

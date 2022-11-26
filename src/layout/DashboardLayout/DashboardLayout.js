@@ -6,9 +6,10 @@ import useRole from "../../Hook/useRole";
 import "./DashBoardLayout.css";
 
 const DashboardLayout = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
 
-  const [role] = useRole(user?.email);
+  const [role] = useRole();
+
   return (
     <div>
       {loading ? (

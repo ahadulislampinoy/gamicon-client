@@ -1,15 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
 
-const useRole = (email) => {
+const useRole = () => {
+  const { user } = useContext(AuthContext);
   const [role, setRole] = useState(null);
   useEffect(() => {
-    if (email) {
+    if (user?.email) {
       axios
-        .get(`http://localhost:5000/users?email=${email}`)
+        .get(`http://localhost:5000/users?email=${user?.email}`)
         .then((res) => setRole(res.data.role));
     }
-  }, [email]);
+  }, [user?.email]);
   return [role];
 };
 

@@ -3,12 +3,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import useRole from "../../Hook/useRole";
 import BookingModal from "./BookingModal";
 
 const Category = () => {
   const products = useLoaderData();
   let [isOpen, setIsOpen] = useState(false);
   const [productData, setProductData] = useState("");
+
+  const [role] = useRole();
 
   function openModal() {
     setIsOpen(true);
@@ -125,17 +128,27 @@ const Category = () => {
                         openModal();
                         setProductData(product);
                       }}
+                      disabled={
+                        role === "admin" || role === "seller" ? true : false
+                      }
+                      // disabled={}
                       class="bg-gradient-to-r from-emerald-700 to-green-600 text-white text-sm md:text-base font-semibold text-center rounded-lg px-6 py-3"
                     >
-                      Buy now
+                      {role === "admin" || role === "seller"
+                        ? "Only buyer"
+                        : "Book now"}
                     </button>
-                    <button
-                      onClick={() => handleReport(product._id)}
-                      class="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
-                    >
-                      Report
-                      <FlagIcon className="inline-block w-5 h-5 ml-1 text-red-500" />
-                    </button>
+                    {role === "admin" || role === "seller" ? (
+                      ""
+                    ) : (
+                      <button
+                        onClick={() => handleReport(product._id)}
+                        class="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
+                      >
+                        Report
+                        <FlagIcon className="inline-block w-5 h-5 ml-1 text-red-500" />
+                      </button>
+                    )}
                   </div>
                   <h1> </h1>
                   <h1 className="text-end text-gray-600 text-sm font-medium">
