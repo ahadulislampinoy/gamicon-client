@@ -15,7 +15,6 @@ const Categories = () => {
     });
   }, []);
 
-  console.log(categories);
   return (
     <div className="bg-white justify-between px-8 lg:px-14 py-14 mx-auto">
       <div className="max-w-screen-2xl">
@@ -25,7 +24,7 @@ const Categories = () => {
           </h2>
         </div>
         {loading ? (
-          <LargeSpinner />
+          <LargeSpinner height={"h-0"} />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 rounded-lg gap-4 lg:gap-6">
             {categories.map((category) => (

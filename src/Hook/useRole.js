@@ -4,15 +4,19 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 const useRole = () => {
   const { user } = useContext(AuthContext);
+  const [roleLoading, setRoleLoading] = useState(true);
   const [role, setRole] = useState(null);
   useEffect(() => {
     if (user?.email) {
       axios
         .get(`http://localhost:5000/users?email=${user?.email}`)
-        .then((res) => setRole(res.data.role));
+        .then((res) => {
+          setRole(res.data.role);
+          setRoleLoading(false);
+        });
     }
   }, [user?.email]);
-  return [role];
+  return [role, roleLoading];
 };
 
 export default useRole;

@@ -1,7 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React, { Fragment } from "react";
+import CheckoutForm from "./CheckoutForm";
 
 const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
+  const stripePromise = loadStripe(process.env.REACT_APP_stripe_publishableKey);
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -33,13 +38,14 @@ const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 capitalize"
                 >
-                  Payment ${bookingData.resellPrice} for{" "}
+                  Payment ${bookingData.resellPrice} for
                   {bookingData.productName}
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
+                    <Elements stripe={stripePromise}>
+                      <CheckoutForm bookingData={bookingData} />
+                    </Elements>
                   </p>
                 </div>
 

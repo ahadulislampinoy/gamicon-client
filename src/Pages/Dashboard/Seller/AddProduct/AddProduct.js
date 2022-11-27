@@ -57,7 +57,6 @@ const AddProduct = () => {
             sellerEmail: user?.email,
             salesStatus: "available",
             advertised: false,
-            sellerVerification: false,
             report: false,
           };
           axios
@@ -98,9 +97,7 @@ const AddProduct = () => {
                 className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
                 {...register("category")}
               >
-                <option value="01" selected>
-                  Xbox
-                </option>
+                <option value="01">Xbox</option>
                 <option value="02">Play station</option>
                 <option value="03">Nintendo</option>
               </select>

@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   return (
     <div>
       {loading ? (
-        <LargeSpinner height={"h-screen"} />
+        <LargeSpinner />
       ) : (
         <div className="flex items-center justify-center h-screen bg-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-3 w-screen h-screen">

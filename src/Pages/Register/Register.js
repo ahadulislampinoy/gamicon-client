@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { SaveUserToDb } from "../../Api/SaveUserToDb";
 import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useToken from "../../Hook/useToken";
 
 const Register = () => {
   const {
@@ -21,6 +22,8 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   let [plan, setPlan] = useState("buyer"); //This is for select buyer or seller
   const [role, setRole] = useState("buyer");
+  const [email, setEmail] = useState("");
+  const [token] = useToken(email);
 
   const onSubmit = (data) => {
     setAuthError("");
@@ -41,6 +44,7 @@ const Register = () => {
           createUser(data.email, data.password)
             .then((result) => {
               const user = result.user;
+              console.log(user);
               setLoading(false);
               reset();
               setImgUrl("");
@@ -49,7 +53,7 @@ const Register = () => {
                 .then((result) => {
                   console.log("User name, image added");
                   toast.success("Registration successful");
-                  SaveUserToDb(user, role);
+                  SaveUserToDb(user, role, setEmail);
                 })
                 .catch((err) => {
                   setAuthError(err);
@@ -69,6 +73,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Registration successful");
+        setEmail(user?.email);
         SaveUserToDb(user, "buyer");
       })
       .catch((err) => {
@@ -89,7 +94,7 @@ const Register = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Name
@@ -107,13 +112,13 @@ const Register = () => {
                 </div>
                 <div>
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="inline-block text-gray-800 text-sm sm:text-base mt-3 mb-1"
                   >
                     Profile Photo
                   </label>
                   <label
-                    for="dropzone-file"
+                    htmlFor="dropzone-file"
                     className="flex items-center  bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2 cursor-pointer"
                   >
                     <h2 className="text-gray-500 overflow-hidden">
@@ -143,7 +148,7 @@ const Register = () => {
                 </div>
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Email
@@ -161,7 +166,7 @@ const Register = () => {
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Password

@@ -13,6 +13,7 @@ const Navbar = () => {
     logOutUser()
       .then((result) => {
         toast.success("Logout successful");
+        localStorage.removeItem("gamicon-token");
       })
       .catch((err) => {
         toast.error(err.message);

@@ -1,10 +1,11 @@
-import { default as React, useContext, useState } from "react";
+import { default as React, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SaveUserToDb } from "../../Api/SaveUserToDb";
 import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useToken from "../../Hook/useToken";
 
 const Login = () => {
   const {
@@ -13,19 +14,35 @@ const Login = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { loginUser, googleSignIn, loading } = useContext(AuthContext);
+  const { loginUser, googleSignIn } = useContext(AuthContext);
   const [authError, setAuthError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const from = location.state?.from?.pathname || "/";
+  const [email, setEmail] = useState("");
+  const [token] = useToken(email);
+
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, token]);
 
   const onSubmit = (data) => {
     setAuthError("");
+    setLoading(true);
     loginUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         toast.success("Login successful");
         reset();
+        setEmail(user?.email);
+        setLoading(false);
       })
       .catch((err) => {
         setAuthError(err);
+        setLoading(false);
       });
   };
 
@@ -35,6 +52,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login successful");
+        setEmail(user?.email);
         SaveUserToDb(user, "buyer");
       })
       .catch((err) => {
@@ -55,7 +73,7 @@ const Login = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Email
@@ -73,7 +91,7 @@ const Login = () => {
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
                     Password
@@ -93,7 +111,6 @@ const Login = () => {
                   <p className="text-red-500">{authError.message}</p>
                 )}
                 <button className="w-full block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-4 px-8 py-3">
-                  {/* Register */}
                   {loading ? <SmallSpinner /> : "Login"}
                 </button>
               </form>

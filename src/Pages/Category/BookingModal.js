@@ -27,13 +27,19 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
       productImage,
       phoneNumber: data.phoneNumber,
     };
-    axios.post(`http://localhost:5000/bookings`, bookingDetails).then((res) => {
-      if (res.data.insertedId) {
-        toast.success("Item booked successful");
-        closeModal();
-        reset();
-      }
-    });
+    axios
+      .post(`http://localhost:5000/bookings`, bookingDetails, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Item booked successful");
+          closeModal();
+          reset();
+        }
+      });
   };
 
   return (
@@ -76,7 +82,7 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                     >
                       Name
@@ -94,7 +100,7 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
 
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                     >
                       Email
