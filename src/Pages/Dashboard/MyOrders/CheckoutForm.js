@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import SmallSpinner from "../../../components/Loader/SmallSpinner";
 
 const CheckoutForm = ({ bookingData }) => {
   const [cardError, setCardError] = useState("");
@@ -11,7 +12,7 @@ const CheckoutForm = ({ bookingData }) => {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const { buyerEmail: email, resellPrice: price, _id } = bookingData;
+  const { buyerEmail: email, resellPrice: price, _id, productId } = bookingData;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -66,6 +67,7 @@ const CheckoutForm = ({ bookingData }) => {
         email: email,
         transactionId: paymentIntent.id,
         price,
+        productId,
         bookingId: _id,
       };
       axios
@@ -76,6 +78,11 @@ const CheckoutForm = ({ bookingData }) => {
             toast.success("Your payment successful!");
             setPaymentSuccess(true);
             setTransactionId(paymentIntent.id);
+            axios
+              .patch(
+                `http://localhost:5000/update-sale-status?productId=${productId}&bookingId=${_id}`
+              )
+              .then((res) => console.log(res.data));
           }
           setProcessing(false);
         });
@@ -103,9 +110,9 @@ const CheckoutForm = ({ bookingData }) => {
         <button
           type="submit"
           className="inline-block
-          bg-gray-100
+          bg-green-300
           text-black
-          hover:bg-gray-200
+          hover:bg-green-400
           shadow
           md:text-sm
           font-semibold
@@ -114,14 +121,22 @@ const CheckoutForm = ({ bookingData }) => {
           outline-none
           transition
           duration-100
-          p-3"
-          disabled={!stripe}
+          mt-5
+          py-2 px-5"
+          disabled={!stripe || processing}
         >
-          Pay
+          {!stripe || processing ? <SmallSpinner /> : "Pay"}
         </button>
       </form>
-      <p className="text-red-500">{cardError.message}</p>
-      {paymentSuccess && <p>Transaction id: {transactionId}</p>}
+      <div className="text-base font-medium">
+        {cardError && <p className="mt-3 text-red-500">{cardError.message}</p>}
+        {paymentSuccess && (
+          <p className="mt-3">
+            Transaction id:{" "}
+            <span className="text-green-600">{transactionId}</span>
+          </p>
+        )}
+      </div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const ReportedItems = () => {
     <div className="w-full">
       {reportedItems.length === 0 ? (
         <div className="flex h-screen text-2xl sm:text-3xl font-medium justify-center items-center">
-          No reported items avaiable
+          No reported items available
         </div>
       ) : (
         <div className="sm:p-5 w-full overflow-hidden">

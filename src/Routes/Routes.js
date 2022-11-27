@@ -14,6 +14,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 
@@ -45,7 +46,14 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
-      { path: "/dashboard/myorders", element: <MyOrders /> },
+      {
+        path: "/dashboard/myorders",
+        element: (
+          <BuyerRoute>
+            <MyOrders />
+          </BuyerRoute>
+        ),
+      },
       {
         path: "/dashboard/addproduct",
         element: (

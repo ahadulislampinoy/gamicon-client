@@ -1,5 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Elements } from "@stripe/react-stripe-js";
+
 import { loadStripe } from "@stripe/stripe-js";
 import React, { Fragment } from "react";
 import CheckoutForm from "./CheckoutForm";
@@ -36,27 +38,22 @@ const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 capitalize"
+                  className="flex justify-between text-lg font-medium leading-6 text-gray-900 capitalize"
                 >
-                  Payment ${bookingData.resellPrice} for
-                  {bookingData.productName}
+                  <span>
+                    Payment ${bookingData.resellPrice} for{" "}
+                    {bookingData.productName}
+                  </span>
+                  <span onClick={closeModal}>
+                    <XMarkIcon className="h-5 w-5 text-gray-800 cursor-pointer inline-block" />
+                  </span>
                 </Dialog.Title>
-                <div className="mt-2">
-                  <div className="text-sm text-gray-500">
+                <div className="mt-5">
+                  <div className="text-sm text-gray-800">
                     <Elements stripe={stripePromise}>
                       <CheckoutForm bookingData={bookingData} />
                     </Elements>
                   </div>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={closeModal}
-                  >
-                    Got it, thanks!
-                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

@@ -35,7 +35,7 @@ const MyOrders = () => {
     <div className="w-full">
       {bookingItems.length === 0 ? (
         <div className="flex h-screen text-3xl font-medium justify-center items-center">
-          No orders avaiable
+          No orders available
         </div>
       ) : (
         <div className="w-full">
@@ -45,7 +45,7 @@ const MyOrders = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-5">
             {bookingItems.map((booking) => (
               <div key={booking._id}>
-                <div className="group h-96 block bg-gray-100 rounded-t-lg overflow-hidden relative">
+                <div className="group h-72 block bg-gray-100 rounded-t-lg overflow-hidden relative">
                   <img
                     src={booking.productImage}
                     loading="lazy"

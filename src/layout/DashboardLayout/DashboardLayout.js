@@ -25,14 +25,16 @@ const DashboardLayout = () => {
                   <li className="flex justify-center font-medium text-2xl text-gray-700 p-3 rounded-lg">
                     __<span className="capitalize">{role}</span>__
                   </li>
-                  <NavLink
-                    to="/dashboard/myorders"
-                    className="inline-block w-full"
-                  >
-                    <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
-                      My orders
-                    </li>
-                  </NavLink>
+                  {role === "buyer" && (
+                    <NavLink
+                      to="/dashboard/myorders"
+                      className="inline-block w-full"
+                    >
+                      <li className="flex font-medium text-gray-700 hover:text-green-700 p-3 rounded-lg bg-gray-100 hover:bg-green-100">
+                        My orders
+                      </li>
+                    </NavLink>
+                  )}
                   {role === "seller" && (
                     <>
                       <NavLink

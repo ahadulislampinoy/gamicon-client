@@ -189,12 +189,15 @@ const AddProduct = () => {
                 <input
                   placeholder="Enter originial price"
                   type="number"
-                  {...register("originialPrice", { required: true })}
+                  {...register("originialPrice", {
+                    required: true,
+                    max: 99999,
+                  })}
                   className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
                 />{" "}
                 {errors?.originialPrice && (
                   <p className="text-red-500 mt-1">
-                    Originial price is required
+                    Originial price is required within $999,99
                   </p>
                 )}
               </div>
@@ -206,11 +209,17 @@ const AddProduct = () => {
                 <input
                   placeholder="Enter resell price"
                   type="number"
-                  {...register("resellPrice", { required: true })}
+                  {...register("resellPrice", {
+                    required: true,
+                    max: 99999,
+                  })}
                   className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
                 />{" "}
                 {errors?.resellPrice && (
-                  <p className="text-red-500 mt-1">Resell price is required</p>
+                  <p className="text-red-500 mt-1">
+                    {" "}
+                    Originial price is required within $999,99
+                  </p>
                 )}
               </div>
             </div>

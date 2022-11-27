@@ -14,12 +14,14 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
     formState: { errors },
   } = useForm();
   const { user } = useContext(AuthContext);
-  const { productName, resellPrice, salesStatus, productImage } = productData;
+  const { productName, _id, resellPrice, salesStatus, productImage } =
+    productData;
 
   const onSubmit = (data) => {
     const bookingDetails = {
       buyerName: user?.displayName,
       buyerEmail: user?.email,
+      productId: _id,
       productName,
       resellPrice,
       location: data.location,

@@ -52,7 +52,7 @@ const MyProducts = () => {
     <div className="w-full">
       {products.length === 0 ? (
         <div className="flex h-screen text-3xl font-medium justify-center items-center">
-          No products avaiable
+          No products available
         </div>
       ) : (
         <>
