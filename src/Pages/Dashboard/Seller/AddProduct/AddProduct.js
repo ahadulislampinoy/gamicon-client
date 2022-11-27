@@ -60,9 +60,18 @@ const AddProduct = () => {
             report: false,
           };
           axios
-            .post(`http://localhost:5000/products`, productDetails)
+            .post(
+              `http://localhost:5000/products?email=${user?.email}`,
+              productDetails,
+              {
+                headers: {
+                  authorization: `Bearer ${localStorage.getItem(
+                    "gamicon-token"
+                  )}`,
+                },
+              }
+            )
             .then((res) => {
-              console.log(res.data);
               if (res.data.insertedId) {
                 toast.success("Product added successful");
                 reset();

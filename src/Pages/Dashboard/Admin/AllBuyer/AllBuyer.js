@@ -1,6 +1,8 @@
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+
 import toast from "react-hot-toast";
 
 const AllBuyer = () => {
@@ -34,80 +36,78 @@ const AllBuyer = () => {
         </div>
       ) : (
         <div className="sm:p-5 w-full">
-          <h2 className="text-gray-700 text-2xl lg:text-3xl font-semibold text-start mb-8 ">
-            All buyers
+          <h2 className="text-gray-700 text-2xl sm:text-3xl font-semibold text-start mb-2">
+            Total buyer - {allbuyer.length}
           </h2>
           <div className="mx-auto px-4">
-            <div className="py-8">
-              <div className="-mx-4 sm:-mx-8 p-4 overflow-x-auto">
-                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                  <table className="min-w-full leading-normal">
-                    <thead>
-                      <tr>
-                        <th
-                          scope="col"
-                          className="text-center px-5 py-3 bg-white border-b border-gray-200 text-gray-800 font-medium"
-                        >
-                          Photo
-                        </th>
-                        <th
-                          scope="col"
-                          className="text-center px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 font-medium"
-                        >
-                          Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="text-center px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 font-medium"
-                        >
-                          Email
-                        </th>
-                        <th
-                          scope="col"
-                          className="text-center px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 font-medium"
-                        >
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {allbuyer.map((buyer) => (
-                        <tr key={buyer._id} className="text-center">
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white ">
-                            <div className="flex items-center justify-center">
-                              <div className="flex-shrink-0">
-                                <img
-                                  alt=""
-                                  src={buyer.image}
-                                  className="mx-auto object-cover rounded-full h-12 w-12"
-                                />
-                              </div>
+            <div className="-mx-4 sm:-mx-8 p-4 overflow-x-auto">
+              <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <table className="min-w-full leading-normal">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="text-center px-5 py-3border-b border-gray-200 text-gray-800 font-medium"
+                      >
+                        Photo
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-center px-5 py-3 border-b border-gray-200 text-gray-800 font-medium"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-center px-5 py-3 border-b border-gray-200 text-gray-800 font-medium"
+                      >
+                        Email
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-center px-5 py-3 border-b border-gray-200 text-gray-800 font-medium"
+                      >
+                        Delete
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allbuyer.map((buyer) => (
+                      <tr key={buyer._id} className="text-center">
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white ">
+                          <div className="flex items-center justify-center">
+                            <div className="flex-shrink-0">
+                              <img
+                                alt=""
+                                src={buyer.image}
+                                className="mx-auto object-cover rounded-lg h-12 w-12"
+                              />
                             </div>
-                          </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white ">
-                            <p className="text-gray-900 whitespace-no-wrap">
-                              {buyer.name}
-                            </p>
-                          </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white ">
-                            <p className="text-gray-900 whitespace-no-wrap">
-                              {buyer.email}
-                            </p>
-                          </td>
+                          </div>
+                        </td>
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white ">
+                          <p className="text-gray-900 whitespace-no-wrap">
+                            {buyer.name}
+                          </p>
+                        </td>
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white ">
+                          <p className="text-gray-900 whitespace-no-wrap">
+                            {buyer.email}
+                          </p>
+                        </td>
 
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white ">
-                            <button
-                              onClick={() => handleDelete(buyer._id)}
-                              className="inline-block bg-gradient-to-r from-rose-700 to-red-600  text-white  md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-3 py-2"
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white ">
+                          <button
+                            onClick={() => handleDelete(buyer._id)}
+                            className="inline-block bg-gray-100 text-white hover:bg-gray-200 shadow md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 p-3"
+                          >
+                            <TrashIcon className="h-5 w-5 text-gray-800 inline-block" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

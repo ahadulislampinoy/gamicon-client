@@ -42,11 +42,11 @@ const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
                   {bookingData.productName}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-500">
                     <Elements stripe={stripePromise}>
                       <CheckoutForm bookingData={bookingData} />
                     </Elements>
-                  </p>
+                  </div>
                 </div>
 
                 <div className="mt-4">

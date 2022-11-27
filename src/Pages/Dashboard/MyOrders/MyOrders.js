@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import PaymentModal from "./PaymentModal";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -77,7 +78,7 @@ const MyOrders = () => {
                         }}
                         className="block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-3 px-4 py-2"
                       >
-                        Book
+                        Pay
                       </button>
                     </span>
                   </div>
@@ -85,11 +86,11 @@ const MyOrders = () => {
               </div>
             ))}
           </div>
-          {/* <PaymentModal
+          <PaymentModal
             isOpen={isOpen}
             closeModal={closeModal}
             bookingData={bookingData}
-          /> */}
+          />
         </div>
       )}
     </div>

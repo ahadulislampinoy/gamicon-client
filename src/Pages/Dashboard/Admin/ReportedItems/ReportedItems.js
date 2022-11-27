@@ -1,3 +1,4 @@
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
@@ -25,32 +26,32 @@ const ReportedItems = () => {
   return (
     <div className="w-full">
       {reportedItems.length === 0 ? (
-        <div className="flex h-screen text-3xl font-medium justify-center items-center">
+        <div className="flex h-screen text-2xl sm:text-3xl font-medium justify-center items-center">
           No reported items avaiable
         </div>
       ) : (
         <div className="sm:p-5 w-full overflow-hidden">
-          <h2 className="text-gray-700 text-2xl lg:text-3xl font-semibold text-start mb-8">
-            Reported items
+          <h2 className="text-gray-700 text-3xl font-semibold text-start mb-5">
+            Total reported items - {reportedItems.length}
           </h2>
           <div className="overflow-x-auto shadow rounded-lg">
             <table className="table p-4 bg-white w-full">
-              <thead>
+              <thead className="bg-gray-100">
                 <tr>
-                  <th className="font-medium text-start border-b-2 px-8 py-4 dark:border-dark-5 whitespace-nowrap text-gray-900">
+                  <th className="font-medium text-start border-b-2 px-8 py-4 text-gray-800">
                     Serial
                   </th>
-                  <th className="font-medium text-start border-b-2 px-8 py-4 dark:border-dark-5 whitespace-nowrap text-gray-900">
+                  <th className="font-medium text-start border-b-2 px-8 py-4 text-gray-800">
                     Product name
                   </th>
-                  <th className="font-medium text-start border-b-2 px-8 py-4 dark:border-dark-5 whitespace-nowrap text-gray-900">
+                  <th className="font-medium text-start border-b-2 px-8 py-4 text-gray-800">
                     Product category
                   </th>
-                  <th className="font-medium text-start border-b-2 px-8 py-4 dark:border-dark-5 whitespace-nowrap text-gray-900">
+                  <th className="font-medium text-start border-b-2 px-8 py-4 text-gray-800">
                     Seller email
                   </th>
-                  <th className="font-medium text-start border-b-2 px-8 py-4 dark:border-dark-5 whitespace-nowrap text-gray-900">
-                    Action
+                  <th className="font-medium text-start border-b-2 px-8 py-4 text-gray-800">
+                    Delete
                   </th>
                 </tr>
               </thead>
@@ -78,9 +79,9 @@ const ReportedItems = () => {
                     <td className="border-b-2 px-8 py-4 dark:border-dark-5">
                       <button
                         onClick={() => handleDelete(item._id)}
-                        className="inline-block bg-gradient-to-r from-rose-700 to-red-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-3 py-2"
+                        className="inline-block bg-gray-100 text-white hover:bg-gray-200 shadow md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 p-3"
                       >
-                        Delete
+                        <TrashIcon className="h-5 w-5 text-gray-800 inline-block" />
                       </button>
                     </td>
                   </tr>

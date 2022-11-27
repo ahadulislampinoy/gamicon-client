@@ -56,8 +56,8 @@ const MyProducts = () => {
         </div>
       ) : (
         <>
-          <h2 className="text-gray-700 text-2xl lg:text-3xl font-semibold text-start mb-5">
-            My products
+          <h2 className="text-gray-700 text-2xl lg:text-3xl font-semibold text-start mb-6">
+            Total my products - {products.length}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
