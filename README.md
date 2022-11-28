@@ -6,6 +6,12 @@ A gaming console reselling website, Where a buyer can buy gaming consoles, selle
 
 Hosted in Firebase -> [Gamicon](https://gamiconn.web.app/)
 
+## Admin Access
+
+Email: `admin@gmail.com`
+
+Password: `adminn`
+
 ## Features
 
 - Can buy available consoles
@@ -31,10 +37,6 @@ Hosted in Firebase -> [Gamicon](https://gamiconn.web.app/)
 
 ## Tech Stack
 
-- React
-- React Router
-- Mongodb
-- Express
-- Firebase
-- Vercel
-- TailwindCSS
+**Client:** React, React Router, Firebase, TailwindCSS
+
+**Server:** Node, Express, MongoDB, Vercel
