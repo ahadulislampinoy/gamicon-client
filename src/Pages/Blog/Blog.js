@@ -6,7 +6,7 @@ const Blog = () => {
       <div class="bg-white py-6 sm:py-8 lg:py-12">
         <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
           <div class="mb-10 md:mb-16">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4">
               Most Asked Interview Questions
             </h2>
 
@@ -19,7 +19,8 @@ const Blog = () => {
             <div class="bg-gray-100 rounded-lg p-5">
               <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
                 <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
-                  How does the product work?
+                  What are the different ways to manage a state in a React
+                  application?
                 </h3>
 
                 <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
@@ -38,17 +39,22 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+              <p class="text-gray-500 leading-7">
+                In React apps, there are several ways to manage a state. The
+                most used ways are Local state, Global state, Server state, and
+                URL state. Local state is mostly managed by useState hook. The
+                global state we use when we want to get and update data from
+                anywhere in our app the most common global state example is
+                COntext API. Data comes from an external server that must be
+                integrated with our UI state, React Query makes managing server
+                state much easier.
               </p>
             </div>
 
             <div class="bg-gray-100 rounded-lg p-5">
               <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
                 <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
-                  What are the features?
+                  How does prototypical inheritance work?
                 </h3>
 
                 <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
@@ -67,17 +73,22 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+              <p class="text-gray-500 leading-7">
+                In JavaScript, objects have a special private property that
+                holds a link to another object called its Prototype. It's a
+                feature used to add methods and properties to objects. It is a
+                method by which an object can inherit the properties and methods
+                of another object. Traditionally, in order to get and set the
+                Prototype of an object, we use Object.getPrototypeOf and
+                Object.setPrototypeOf. Nowadays, in modern language, it is being
+                set using __proto__.
               </p>
             </div>
 
             <div class="bg-gray-100 rounded-lg p-5">
               <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
                 <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
-                  What about integrations?
+                  What is a unit test? Why should we write unit tests?
                 </h3>
 
                 <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
@@ -96,17 +107,19 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+              <p class="text-gray-500 leading-7">
+                Unit testing is testing individual components of a software
+                program or application. The main purpose of unit testing is to
+                ensure that each individual part is working well and as it’s
+                supposed to work. The entire system will only be able to work
+                well if the individual parts are working well.
               </p>
             </div>
 
             <div class="bg-gray-100 rounded-lg p-5">
               <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
                 <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
-                  Is support available?
+                  React vs. Angular vs. Vue?
                 </h3>
 
                 <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
@@ -125,10 +138,15 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+              <p class="text-gray-500 leading-7">
+                These three frameworks are used in the Front end applications.
+                React is a UI library, Angular is a fully-fledged framework and
+                Vue.js is a progressive framework. Angular is the most mature
+                framework among React and Vue. If you have a large team and use
+                TypeScript, Angular might be a good solution. React framework
+                makes dynamic websites work seamlessly. Among these three Vue is
+                the newest, If you’re looking for simplicity and flexibility,
+                Vue is the right choice for you.
               </p>
             </div>
           </div>
