@@ -27,7 +27,7 @@ export function Slider({ advertisedProducts }) {
                 </h4>
               </div>
               <p class="max-w-md text-gray-600 mb-4">
-                {product.description.slice(0, 30) + "..."}
+                {product.description.slice(0, 150) + "..."}
               </p>
 
               <div>
