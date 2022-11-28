@@ -9,14 +9,14 @@ const Categories = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5000/categories`).then((res) => {
+    axios.get(`https://gamicon-server.vercel.app/categories`).then((res) => {
       setCategories(res.data);
       setLoading(false);
     });
   }, []);
 
   return (
-    <div className="bg-white justify-between px-8 lg:px-14 py-14 mx-auto">
+    <div className="bg-white justify-between px-6 lg:px-12 py-14 mx-auto">
       <div className="max-w-screen-2xl">
         <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-4 md:mb-8">
           <h2 className="capitalize text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-2 lg:mb-0">
@@ -31,6 +31,7 @@ const Categories = () => {
               <Link
                 key={category._id}
                 to={`/categories/${category.category_id}`}
+                className="hover:scale-105 transition duration-300"
               >
                 <div
                   key={category._id}

@@ -11,7 +11,7 @@ const MyOrders = () => {
     queryKey: ["bookingItems"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/bookings?email=${user?.email}`,
+        `https://gamicon-server.vercel.app/bookings?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
@@ -53,7 +53,13 @@ const MyOrders = () => {
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200"
                   />
 
-                  <span className="bg-green-300 text-black text-sm font-semibold tracking-wider uppercase rounded-r-lg absolute left-0 top-3 px-3 py-1.5">
+                  <span
+                    className={`text-black text-sm font-semibold tracking-wider uppercase rounded-r-lg absolute left-0 top-3 px-3 py-1.5 ${
+                      booking.salesStatus === "available"
+                        ? "bg-green-300"
+                        : "bg-red-300"
+                    }`}
+                  >
                     {booking.salesStatus}
                   </span>
                 </div>
@@ -76,9 +82,12 @@ const MyOrders = () => {
                           openModal();
                           setBookingData(booking);
                         }}
+                        disabled={
+                          booking.salesStatus === "available" ? false : true
+                        }
                         className="block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 mt-3 px-4 py-2"
                       >
-                        Pay
+                        {booking.salesStatus === "available" ? "Pay" : "Paid"}
                       </button>
                     </span>
                   </div>
@@ -88,6 +97,7 @@ const MyOrders = () => {
           </div>
           <PaymentModal
             isOpen={isOpen}
+            refetch={refetch}
             closeModal={closeModal}
             bookingData={bookingData}
           />

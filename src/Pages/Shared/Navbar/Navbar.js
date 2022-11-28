@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="w-full shadow">
-        <div className="justify-between px-8 lg:px-14 py-2 mx-auto md:items-center lg:grid grid-cols-2">
+        <div className="justify-between px-8 lg:px-14 py-2 mx-auto md:items-center lg:grid grid-cols-2 shadow-lg shadow-black">
           <div className="flex items-center justify-between py-2">
             <Link to="/" className="flex items-center ">
               <img src={logo} alt="" className="w-[13%] sm:w-[10%]" />

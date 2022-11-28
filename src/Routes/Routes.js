@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         path: "/categories/:id",
         element: <Category />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
+          fetch(`https://gamicon-server.vercel.app/categories/${params.id}`),
       },
       { path: "blog", element: <Blog /> },
       { path: "login", element: <Login /> },

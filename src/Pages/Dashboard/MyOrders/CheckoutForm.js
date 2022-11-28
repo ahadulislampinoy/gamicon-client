@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import SmallSpinner from "../../../components/Loader/SmallSpinner";
 
-const CheckoutForm = ({ bookingData }) => {
+const CheckoutForm = ({ bookingData, refetch }) => {
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -15,7 +15,7 @@ const CheckoutForm = ({ bookingData }) => {
   const { buyerEmail: email, resellPrice: price, _id, productId } = bookingData;
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://gamicon-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price }),
@@ -71,18 +71,19 @@ const CheckoutForm = ({ bookingData }) => {
         bookingId: _id,
       };
       axios
-        .post(`http://localhost:5000/payments`, paymentDetails)
+        .post(`https://gamicon-server.vercel.app/payments`, paymentDetails)
         .then((res) => {
-          console.log(res.data);
           if (res.data.insertedId) {
             toast.success("Your payment successful!");
             setPaymentSuccess(true);
             setTransactionId(paymentIntent.id);
             axios
               .patch(
-                `http://localhost:5000/update-sale-status?productId=${productId}&bookingId=${_id}`
+                `https://gamicon-server.vercel.app/update-sale-status?productId=${productId}&bookingId=${_id}`
               )
-              .then((res) => console.log(res.data));
+              .then((res) => {
+                refetch();
+              });
           }
           setProcessing(false);
         });
@@ -123,9 +124,15 @@ const CheckoutForm = ({ bookingData }) => {
           duration-100
           mt-5
           py-2 px-5"
-          disabled={!stripe || processing}
+          disabled={!stripe || processing || paymentSuccess}
         >
-          {!stripe || processing ? <SmallSpinner /> : "Pay"}
+          {!stripe || processing ? (
+            <SmallSpinner />
+          ) : paymentSuccess ? (
+            "Paid"
+          ) : (
+            "Pay"
+          )}
         </button>
       </form>
       <div className="text-base font-medium">

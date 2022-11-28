@@ -11,13 +11,13 @@ const Footer = () => {
               <Link to="/" className="text-gray-700 font-medium">
                 Home
               </Link>
-              <a href="#" className="text-gray-700 font-medium">
+              <a href="/" className="text-gray-700 font-medium">
                 Products
               </a>
-              <a href="#" className="text-gray-700 font-medium">
+              <a href="/" className="text-gray-700 font-medium">
                 FAQ
               </a>
-              <a href="#" className="text-gray-700 font-medium">
+              <a href="/" className="text-gray-700 font-medium">
                 Contact
               </a>
               <Link to="/blog" className="text-gray-700 font-medium">
@@ -26,7 +26,7 @@ const Footer = () => {
             </nav>
 
             <div className="flex gap-4">
-              <a href="#" target="_blank" className="text-gray-600">
+              <a href="/" target="_blank" className="text-gray-600">
                 <svg
                   className="w-5 h-5"
                   width="24"
@@ -39,7 +39,7 @@ const Footer = () => {
                 </svg>
               </a>
 
-              <a href="#" target="_blank" className="text-gray-600">
+              <a href="/" target="_blank" className="text-gray-600">
                 <svg
                   className="w-5 h-5"
                   width="24"
@@ -52,7 +52,7 @@ const Footer = () => {
                 </svg>
               </a>
 
-              <a href="#" target="_blank" className="text-gray-600">
+              <a href="/" target="_blank" className="text-gray-600">
                 <svg
                   className="w-5 h-5"
                   width="24"

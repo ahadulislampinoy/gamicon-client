@@ -4,7 +4,7 @@ import banner from "../../../assets/banner.jpg";
 const Banner = () => {
   return (
     <div>
-      <div className="bg-white justify-between px-8 lg:px-14 pt-14 mx-auto">
+      <div className="bg-white justify-between px-6 lg:px-12 pt-14 mx-auto">
         <div className="">
           <section className="flex flex-col lg:flex-row justify-between gap-6 mb-10">
             <div className="xl:w-2/4 flex flex-col justify-center sm:text-center lg:text-left lg:py-12">

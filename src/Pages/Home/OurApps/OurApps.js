@@ -14,7 +14,7 @@ const OurApps = () => {
             </h1>
           </div>
           <div className="flex flex-col items-center justify-center flex-shrink-0 mt-6 space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 lg:ml-4 lg:mt-0 lg:justify-end">
-            <button className="inline-flex items-center px-6 py-3 rounded-lg bg-green-600 text-gray-50">
+            <button className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-700 to-green-600 text-gray-50">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -27,7 +27,7 @@ const OurApps = () => {
                 <span className="font-semibold title-font">Google Play</span>
               </span>
             </button>
-            <button className="inline-flex items-center px-5 py-3 rounded-lg bg-green-600 text-gray-50">
+            <button className="inline-flex items-center px-5 py-3 rounded-lg bg-gradient-to-r from-emerald-700 to-green-600 text-gray-50">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 50 50"

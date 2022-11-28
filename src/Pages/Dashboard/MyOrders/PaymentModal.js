@@ -6,7 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import React, { Fragment } from "react";
 import CheckoutForm from "./CheckoutForm";
 
-const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
+const PaymentModal = ({ isOpen, closeModal, bookingData, refetch }) => {
   const stripePromise = loadStripe(process.env.REACT_APP_stripe_publishableKey);
 
   return (
@@ -51,7 +51,10 @@ const PaymentModal = ({ isOpen, closeModal, bookingData }) => {
                 <div className="mt-5">
                   <div className="text-sm text-gray-800">
                     <Elements stripe={stripePromise}>
-                      <CheckoutForm bookingData={bookingData} />
+                      <CheckoutForm
+                        bookingData={bookingData}
+                        refetch={refetch}
+                      />
                     </Elements>
                   </div>
                 </div>

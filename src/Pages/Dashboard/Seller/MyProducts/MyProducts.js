@@ -15,7 +15,7 @@ const MyProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?email=${user?.email}`
+        `https://gamicon-server.vercel.app/products?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -24,20 +24,22 @@ const MyProducts = () => {
 
   const handleDelete = (id) => {
     setDeleteLoading(true);
-    axios.delete(`http://localhost:5000/products/${id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.deletedCount) {
-        toast.success("Product deleted successful");
-        refetch();
-        setDeleteLoading(false);
-      }
-    });
+    axios
+      .delete(`https://gamicon-server.vercel.app/products/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.deletedCount) {
+          toast.success("Product deleted successful");
+          refetch();
+          setDeleteLoading(false);
+        }
+      });
   };
 
   const handleAdvertise = (id) => {
     setAdvertiseLoading(true);
     axios
-      .patch(`http://localhost:5000/products-advertise/${id}`)
+      .patch(`https://gamicon-server.vercel.app/products-advertise/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount) {
@@ -66,7 +68,13 @@ const MyProducts = () => {
                 className="w-full relative block overflow-hidden rounded-xl productImg_custom"
                 style={{ background: `url(${product.productImage})` }}
               >
-                <span className="absolute right-4 top-4 z-10 inline-flex items-center rounded-full bg-gray-300 px-3 py-1 text-xs font-semibold text-black">
+                <span
+                  className={`absolute right-4 top-4 z-10 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold text-black ${
+                    product.salesStatus === "available"
+                      ? "bg-gray-300"
+                      : "bg-red-300"
+                  }`}
+                >
                   {product.salesStatus}
                 </span>
                 {product.advertised && (
