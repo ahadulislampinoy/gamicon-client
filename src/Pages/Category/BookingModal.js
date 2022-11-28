@@ -30,7 +30,7 @@ const BookingModal = ({ isOpen, closeModal, productData }) => {
       phoneNumber: data.phoneNumber,
     };
     axios
-      .post(`/products-advertise/bookings`, bookingDetails, {
+      .post(`https://gamicon-server.vercel.app/bookings`, bookingDetails, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
         },

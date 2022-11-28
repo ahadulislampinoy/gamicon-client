@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`/products-advertise/categories/${params.id}`),
+          fetch(`https://gamicon-server.vercel.app/categories/${params.id}`),
       },
       { path: "blog", element: <Blog /> },
       { path: "login", element: <Login /> },

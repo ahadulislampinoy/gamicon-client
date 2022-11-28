@@ -9,7 +9,7 @@ const Categories = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`/products-advertise/categories`).then((res) => {
+    axios.get(`https://gamicon-server.vercel.app/categories`).then((res) => {
       setCategories(res.data);
       setLoading(false);
     });
