@@ -1,15 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import SmallSpinner from "../../../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import "./MyProduct.css";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
-  const [deleteLoading, setDeleteLoading] = useState(false);
-  const [advertiseLoading, setAdvertiseLoading] = useState(false);
 
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
@@ -23,7 +20,6 @@ const MyProducts = () => {
   });
 
   const handleDelete = (id) => {
-    setDeleteLoading(true);
     axios
       .delete(`https://gamicon-server.vercel.app/products/${id}`)
       .then((res) => {
@@ -31,19 +27,16 @@ const MyProducts = () => {
         if (res.data.deletedCount) {
           toast.success("Product deleted successful");
           refetch();
-          setDeleteLoading(false);
         }
       });
   };
 
   const handleAdvertise = (id) => {
-    setAdvertiseLoading(true);
     axios
       .patch(`https://gamicon-server.vercel.app/products-advertise/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount) {
-          setAdvertiseLoading(false);
           toast.success("Product advertised successful");
           refetch();
         }
@@ -65,7 +58,7 @@ const MyProducts = () => {
             {products.map((product) => (
               <div
                 key={product._id}
-                className="w-full relative block overflow-hidden rounded-xl productImg_custom"
+                className="w-full relative block overflow-hidden rounded-xl productImg_custom bg-no-repeat"
                 style={{ background: `url(${product.productImage})` }}
               >
                 <span
@@ -91,14 +84,14 @@ const MyProducts = () => {
                     onClick={() => handleDelete(product._id)}
                     className="inline-block bg-gradient-to-r from-red-700 to-rose-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-3 py-2"
                   >
-                    {deleteLoading ? <SmallSpinner /> : "Delete"}
+                    Delete
                   </button>
                   {product.salesStatus !== "sold" && !product.advertised && (
                     <button
                       onClick={() => handleAdvertise(product._id)}
                       className="inline-block bg-gradient-to-r from-emerald-700 to-green-600  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-3 py-2 ml-2"
                     >
-                      {advertiseLoading ? <SmallSpinner /> : "Advertise"}
+                      Advertise{" "}
                     </button>
                   )}
                 </div>

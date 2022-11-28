@@ -3,7 +3,7 @@ import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SaveUserToDb } from "../../Api/SaveUserToDb";
 import SmallSpinner from "../../components/Loader/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -23,6 +23,7 @@ const Register = () => {
   let [plan, setPlan] = useState("buyer"); //This is for select buyer or seller
   const [role, setRole] = useState("buyer");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const [token] = useToken(email);
 
   const onSubmit = (data) => {
@@ -54,6 +55,7 @@ const Register = () => {
                   console.log("User name, image added");
                   toast.success("Registration successful");
                   SaveUserToDb(user, role, setEmail);
+                  navigate("/");
                 })
                 .catch((err) => {
                   setAuthError(err);
@@ -75,6 +77,7 @@ const Register = () => {
         toast.success("Registration successful");
         setEmail(user?.email);
         SaveUserToDb(user, "buyer");
+        navigate("/");
       })
       .catch((err) => {
         setAuthError(err);

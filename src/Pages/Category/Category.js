@@ -30,14 +30,12 @@ const Category = () => {
   }
 
   const handleReport = (id) => {
-    axios
-      .patch(`https://gamicon-server.vercel.app/report/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.modifiedCount) {
-          toast.success("Product reported successful");
-        }
-      });
+    axios.patch(`http://localhost:5000/report/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount) {
+        toast.success("Product reported successful");
+      }
+    });
   };
 
   return (
@@ -60,7 +58,7 @@ const Category = () => {
                     <div className="bg-gray-100 rounded-lg overflow-hidden relative">
                       <img
                         src={product.productImage}
-                        alt=""
+                        alt="product"
                         className="w-full h-96 object-cover object-center hover:scale-105 transition-all"
                       />
                     </div>
