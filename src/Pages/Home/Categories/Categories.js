@@ -9,7 +9,7 @@ const Categories = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5000/categories`).then((res) => {
+    axios.get(`https://gamicon-server.vercel.app/categories`).then((res) => {
       setCategories(res.data);
       setLoading(false);
     });
