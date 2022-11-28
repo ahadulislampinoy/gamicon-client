@@ -15,7 +15,7 @@ const CheckoutForm = ({ bookingData, refetch }) => {
   const { buyerEmail: email, resellPrice: price, _id, productId } = bookingData;
 
   useEffect(() => {
-    fetch("https://gamicon-server.vercel.app/create-payment-intent", {
+    fetch("/products-advertise/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price }),
@@ -70,23 +70,21 @@ const CheckoutForm = ({ bookingData, refetch }) => {
         productId,
         bookingId: _id,
       };
-      axios
-        .post(`https://gamicon-server.vercel.app/payments`, paymentDetails)
-        .then((res) => {
-          if (res.data.insertedId) {
-            toast.success("Your payment successful!");
-            setPaymentSuccess(true);
-            setTransactionId(paymentIntent.id);
-            axios
-              .patch(
-                `https://gamicon-server.vercel.app/update-sale-status?productId=${productId}&bookingId=${_id}`
-              )
-              .then((res) => {
-                refetch();
-              });
-          }
-          setProcessing(false);
-        });
+      axios.post(`/products-advertise/payments`, paymentDetails).then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Your payment successful!");
+          setPaymentSuccess(true);
+          setTransactionId(paymentIntent.id);
+          axios
+            .patch(
+              `/products-advertise/update-sale-status?productId=${productId}&bookingId=${_id}`
+            )
+            .then((res) => {
+              refetch();
+            });
+        }
+        setProcessing(false);
+      });
     }
   };
   return (

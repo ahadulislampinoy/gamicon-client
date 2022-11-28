@@ -6,7 +6,7 @@ const AdvertisedProducts = () => {
   const [advertisedProducts, setAdvertisedProducts] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://gamicon-server.vercel.app/advertised-products`)
+      .get(`/products-advertise/advertised-products`)
       .then((res) => setAdvertisedProducts(res.data));
   }, []);
 

@@ -8,7 +8,7 @@ const AllSeller = () => {
   const { data: allSeller = [], refetch } = useQuery({
     queryKey: ["allSeller"],
     queryFn: async () => {
-      const res = await fetch("https://gamicon-server.vercel.app/allseller");
+      const res = await fetch("/products-advertise/allseller");
       const data = await res.json();
       return data;
     },
@@ -16,7 +16,7 @@ const AllSeller = () => {
 
   const handleVerify = (email) => {
     axios
-      .patch(`https://gamicon-server.vercel.app/verify-user?email=${email}`)
+      .patch(`/products-advertise/verify-user?email=${email}`)
       .then((res) => {
         if (res.data.modifiedCount) {
           toast.success("Seller verification successful");
@@ -25,7 +25,7 @@ const AllSeller = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://gamicon-server.vercel.app/user/${id}`).then((res) => {
+    axios.delete(`/products-advertise/user/${id}`).then((res) => {
       if (res.data.deletedCount) {
         toast.success("Seller deleted successful");
         refetch();

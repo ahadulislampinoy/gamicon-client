@@ -62,7 +62,7 @@ const AddProduct = () => {
           };
           axios
             .post(
-              `https://gamicon-server.vercel.app/products?email=${user?.email}`,
+              `/products-advertise/products?email=${user?.email}`,
               productDetails,
               {
                 headers: {

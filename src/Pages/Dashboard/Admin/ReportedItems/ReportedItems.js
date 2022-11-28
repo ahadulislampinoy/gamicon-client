@@ -8,23 +8,19 @@ const ReportedItems = () => {
   const { data: reportedItems = [], refetch } = useQuery({
     queryKey: ["reportedItems"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://gamicon-server.vercel.app/reported-items"
-      );
+      const res = await fetch("/products-advertise/reported-items");
       const data = await res.json();
       return data;
     },
   });
 
   const handleDelete = (id) => {
-    axios
-      .delete(`https://gamicon-server.vercel.app/products/${id}`)
-      .then((res) => {
-        if (res.data.deletedCount) {
-          toast.success("Product deleted successful");
-          refetch();
-        }
-      });
+    axios.delete(`/products-advertise/products/${id}`).then((res) => {
+      if (res.data.deletedCount) {
+        toast.success("Product deleted successful");
+        refetch();
+      }
+    });
   };
 
   return (

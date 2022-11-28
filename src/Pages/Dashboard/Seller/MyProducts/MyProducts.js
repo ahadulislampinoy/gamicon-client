@@ -12,7 +12,7 @@ const MyProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `https://gamicon-server.vercel.app/products?email=${user?.email}`
+        `/products-advertise/products?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -20,27 +20,23 @@ const MyProducts = () => {
   });
 
   const handleDelete = (id) => {
-    axios
-      .delete(`https://gamicon-server.vercel.app/products/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.deletedCount) {
-          toast.success("Product deleted successful");
-          refetch();
-        }
-      });
+    axios.delete(`/products-advertise/products/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.deletedCount) {
+        toast.success("Product deleted successful");
+        refetch();
+      }
+    });
   };
 
   const handleAdvertise = (id) => {
-    axios
-      .patch(`https://gamicon-server.vercel.app/products-advertise/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.modifiedCount) {
-          toast.success("Product advertised successful");
-          refetch();
-        }
-      });
+    axios.patch(`/products-advertise/products-advertise/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount) {
+        toast.success("Product advertised successful");
+        refetch();
+      }
+    });
   };
 
   return (
