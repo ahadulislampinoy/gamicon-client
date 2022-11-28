@@ -49,6 +49,7 @@ const AddProduct = () => {
             originialPrice: data.originialPrice,
             resellPrice: data.resellPrice,
             yearsOfUse: data.yearsOfUse,
+            yearOfPurchase: data.yearOfPurchase,
             phoneNumber: data.phoneNumber,
             description: data.description,
             location: data.location,
@@ -158,7 +159,7 @@ const AddProduct = () => {
               </label>
               <input
                 placeholder="Enter phone number"
-                type="text"
+                type="number"
                 {...register("phoneNumber", { required: true })}
                 className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
               />{" "}
@@ -239,19 +240,35 @@ const AddProduct = () => {
               </select>{" "}
             </div>
 
-            <div>
-              <label className="inline-block text-gray-800 text-sm sm:text-base mb-2">
-                Years of use
-              </label>
-              <input
-                placeholder="Enter how many year of used"
-                type="number"
-                {...register("yearsOfUse", { required: true })}
-                className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
-              />{" "}
-              {errors?.yearsOfUse && (
-                <p className="text-red-500 mt-1">Purchase year is required</p>
-              )}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="inline-block text-gray-800 text-sm sm:text-base mb-2">
+                  Years of use
+                </label>
+                <input
+                  placeholder="Enter how many year of used"
+                  type="number"
+                  {...register("yearsOfUse", { required: true })}
+                  className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
+                />{" "}
+                {errors?.yearsOfUse && (
+                  <p className="text-red-500 mt-1"> Years of use is required</p>
+                )}
+              </div>
+              <div>
+                <label className="inline-block text-gray-800 text-sm sm:text-base mb-2">
+                  Year of purchase
+                </label>
+                <input
+                  placeholder="Enter console purchase year"
+                  type="number"
+                  {...register("yearOfPurchase", { required: true })}
+                  className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
+                />{" "}
+                {errors?.yearOfPurchase && (
+                  <p className="text-red-500 mt-1">Purchase year is required</p>
+                )}
+              </div>
             </div>
 
             <div className="sm:col-span-2">
