@@ -37,8 +37,6 @@ const Category = () => {
     });
   };
 
-  console.log(products);
-
   return (
     <div>
       <h1 className="text-3xl px-10 pt-6 font-bold text-gray-800">

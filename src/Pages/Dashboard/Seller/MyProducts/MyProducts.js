@@ -23,7 +23,6 @@ const MyProducts = () => {
     axios
       .delete(`${process.env.REACT_APP_api_url}/products/${id}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.deletedCount) {
           toast.success("Product deleted successful");
           refetch();

@@ -26,7 +26,6 @@ const AllSeller = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         if (res.data.modifiedCount) {
           toast.success("Seller verification successful");
           refetch();
