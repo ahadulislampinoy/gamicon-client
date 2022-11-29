@@ -12,7 +12,7 @@ const MyProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `https://gamicon-server.vercel.app/products?email=${user?.email}`
+        `${process.env.REACT_APP_api_url}/products?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -21,7 +21,7 @@ const MyProducts = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://gamicon-server.vercel.app/products/${id}`)
+      .delete(`${process.env.REACT_APP_api_url}/products/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data.deletedCount) {
@@ -33,9 +33,8 @@ const MyProducts = () => {
 
   const handleAdvertise = (id) => {
     axios
-      .patch(`https://gamicon-server.vercel.app/products-advertise/${id}`)
+      .patch(`${process.env.REACT_APP_api_url}/products-advertise/${id}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.modifiedCount) {
           toast.success("Product advertised successful");
           refetch();

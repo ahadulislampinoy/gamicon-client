@@ -10,7 +10,7 @@ export const SaveUserToDb = (user, role, setEmail) => {
   };
   axios
     .post(
-      `https://gamicon-server.vercel.app/users?email=${user.email}`,
+      `${process.env.REACT_APP_api_url}/users?email=${user.email}`,
       userDetails
     )
     .then((res) => setEmail(user?.email));

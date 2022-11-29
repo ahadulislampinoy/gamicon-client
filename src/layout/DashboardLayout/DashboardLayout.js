@@ -9,11 +9,11 @@ import "./DashBoardLayout.css";
 const DashboardLayout = () => {
   const { loading } = useContext(AuthContext);
 
-  const [role] = useRole();
+  const [role, roleLoading] = useRole();
 
   return (
     <div>
-      {loading ? (
+      {loading || roleLoading ? (
         <LargeSpinner />
       ) : (
         <>

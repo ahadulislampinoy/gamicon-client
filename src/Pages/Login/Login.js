@@ -51,8 +51,8 @@ const Login = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        toast.success("Login successful");
         setEmail(user?.email);
+        toast.success("Login successful");
         SaveUserToDb(user, "buyer");
       })
       .catch((err) => {

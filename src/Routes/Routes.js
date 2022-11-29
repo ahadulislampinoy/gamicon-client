@@ -13,6 +13,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Welcome from "../Pages/Welcome/Welcome";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://gamicon-server.vercel.app/categories/${params.id}`),
+          fetch(`${process.env.REACT_APP_api_url}/categories/${params.id}`),
       },
       { path: "blog", element: <Blog /> },
       { path: "login", element: <Login /> },
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "",
+        element: <Welcome />,
+      },
       {
         path: "/dashboard/myorders",
         element: (

@@ -57,12 +57,13 @@ const AddProduct = () => {
             postedTime: dateTime,
             sellerEmail: user?.email,
             salesStatus: "available",
+            sellerVerification: false,
             advertised: false,
             report: false,
           };
           axios
             .post(
-              `https://gamicon-server.vercel.app/products?email=${user?.email}`,
+              `${process.env.REACT_APP_api_url}/products?email=${user?.email}`,
               productDetails,
               {
                 headers: {
@@ -232,9 +233,7 @@ const AddProduct = () => {
                 className="w-full bg-gray-100 text-gray-800 rounded outline-none transition duration-100 p-3"
                 {...register("condition")}
               >
-                <option value="Excellent" selected>
-                  Excellent
-                </option>
+                <option defaultValue="Excellent">Excellent</option>
                 <option value="Good">Good</option>
                 <option value="Fair">Fair</option>
               </select>{" "}

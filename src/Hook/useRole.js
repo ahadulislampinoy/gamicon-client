@@ -9,7 +9,7 @@ const useRole = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`https://gamicon-server.vercel.app/users?email=${user?.email}`)
+        .get(`${process.env.REACT_APP_api_url}/users?email=${user?.email}`)
         .then((res) => {
           setRole(res.data.role);
           setRoleLoading(false);

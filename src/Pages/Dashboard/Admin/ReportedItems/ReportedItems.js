@@ -9,7 +9,7 @@ const ReportedItems = () => {
     queryKey: ["reportedItems"],
     queryFn: async () => {
       const res = await fetch(
-        "https://gamicon-server.vercel.app/reported-items"
+        `${process.env.REACT_APP_api_url}/reported-items`
       );
       const data = await res.json();
       return data;
@@ -18,7 +18,7 @@ const ReportedItems = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://gamicon-server.vercel.app/products/${id}`)
+      .delete(`${process.env.REACT_APP_api_url}/products/${id}`)
       .then((res) => {
         if (res.data.deletedCount) {
           toast.success("Product deleted successful");

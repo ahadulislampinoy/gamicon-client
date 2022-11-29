@@ -3,30 +3,30 @@ import React from "react";
 const Blog = () => {
   return (
     <div>
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
-          <div class="mb-10 md:mb-16">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4">
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="max-w-screen-xl px-4 md:px-8 mx-auto">
+          <div className="mb-10 md:mb-16">
+            <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4">
               Most Asked Interview Questions
             </h2>
 
-            <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">
+            <p className="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">
               Read And Prepare Yourself For Upcoming Interviews👨‍💻
             </p>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-4 md:gap-8">
-            <div class="bg-gray-100 rounded-lg p-5">
-              <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
-                <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-8">
+            <div className="bg-gray-100 rounded-lg p-5">
+              <div className="flex justify-between items-center border-b gap-4 pb-4 mb-4">
+                <h3 className="text-gray-800 sm:text-lg md:text-xl font-semibold">
                   What are the different ways to manage a state in a React
                   application?
                 </h3>
 
-                <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
+                <span className="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -39,7 +39,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500 leading-7">
+              <p className="text-gray-500 leading-7">
                 In React apps, there are several ways to manage a state. The
                 most used ways are Local state, Global state, Server state, and
                 URL state. Local state is mostly managed by useState hook. The
@@ -51,16 +51,16 @@ const Blog = () => {
               </p>
             </div>
 
-            <div class="bg-gray-100 rounded-lg p-5">
-              <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
-                <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
+            <div className="bg-gray-100 rounded-lg p-5">
+              <div className="flex justify-between items-center border-b gap-4 pb-4 mb-4">
+                <h3 className="text-gray-800 sm:text-lg md:text-xl font-semibold">
                   How does prototypical inheritance work?
                 </h3>
 
-                <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
+                <span className="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -73,7 +73,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500 leading-7">
+              <p className="text-gray-500 leading-7">
                 In JavaScript, objects have a special private property that
                 holds a link to another object called its Prototype. It's a
                 feature used to add methods and properties to objects. It is a
@@ -85,16 +85,16 @@ const Blog = () => {
               </p>
             </div>
 
-            <div class="bg-gray-100 rounded-lg p-5">
-              <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
-                <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
+            <div className="bg-gray-100 rounded-lg p-5">
+              <div className="flex justify-between items-center border-b gap-4 pb-4 mb-4">
+                <h3 className="text-gray-800 sm:text-lg md:text-xl font-semibold">
                   What is a unit test? Why should we write unit tests?
                 </h3>
 
-                <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
+                <span className="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -107,7 +107,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500 leading-7">
+              <p className="text-gray-500 leading-7">
                 Unit testing is testing individual components of a software
                 program or application. The main purpose of unit testing is to
                 ensure that each individual part is working well and as it’s
@@ -116,16 +116,16 @@ const Blog = () => {
               </p>
             </div>
 
-            <div class="bg-gray-100 rounded-lg p-5">
-              <div class="flex justify-between items-center border-b gap-4 pb-4 mb-4">
-                <h3 class="text-gray-800 sm:text-lg md:text-xl font-semibold">
+            <div className="bg-gray-100 rounded-lg p-5">
+              <div className="flex justify-between items-center border-b gap-4 pb-4 mb-4">
+                <h3 className="text-gray-800 sm:text-lg md:text-xl font-semibold">
                   React vs. Angular vs. Vue?
                 </h3>
 
-                <span class="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
+                <span className="w-8 h-8 inline-flex justify-center items-center shrink-0 bg-gray-300 text-gray-500 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -138,7 +138,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <p class="text-gray-500 leading-7">
+              <p className="text-gray-500 leading-7">
                 These three frameworks are used in the Front end applications.
                 React is a UI library, Angular is a fully-fledged framework and
                 Vue.js is a progressive framework. Angular is the most mature

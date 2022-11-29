@@ -6,11 +6,7 @@ const useToken = (email) => {
   useEffect(() => {
     if (email) {
       axios
-        .get(`https://gamicon-server.vercel.app/jwt?email=${email}`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
-          },
-        })
+        .get(`${process.env.REACT_APP_api_url}/jwt?email=${email}`)
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem("gamicon-token", res.data.token);

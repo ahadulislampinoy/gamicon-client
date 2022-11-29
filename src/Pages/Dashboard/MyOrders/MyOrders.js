@@ -11,7 +11,7 @@ const MyOrders = () => {
     queryKey: ["bookingItems"],
     queryFn: async () => {
       const res = await fetch(
-        `https://gamicon-server.vercel.app/bookings?email=${user?.email}`,
+        `${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,

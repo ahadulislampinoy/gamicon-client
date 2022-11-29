@@ -8,7 +8,7 @@ const AllSeller = () => {
   const { data: allSeller = [], refetch } = useQuery({
     queryKey: ["allSeller"],
     queryFn: async () => {
-      const res = await fetch("https://gamicon-server.vercel.app/allseller");
+      const res = await fetch(`${process.env.REACT_APP_api_url}/allseller`);
       const data = await res.json();
       return data;
     },
@@ -16,16 +16,26 @@ const AllSeller = () => {
 
   const handleVerify = (email) => {
     axios
-      .patch(`https://gamicon-server.vercel.app/verify-user?email=${email}`)
+      .patch(
+        `${process.env.REACT_APP_api_url}/verify-user?email=${email}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
+          },
+        }
+      )
       .then((res) => {
+        console.log(res.data);
         if (res.data.modifiedCount) {
           toast.success("Seller verification successful");
+          refetch();
         }
       });
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://gamicon-server.vercel.app/user/${id}`).then((res) => {
+    axios.delete(`${process.env.REACT_APP_api_url}/user/${id}`).then((res) => {
       if (res.data.deletedCount) {
         toast.success("Seller deleted successful");
         refetch();
@@ -110,9 +120,10 @@ const AllSeller = () => {
                         <td className="px-5 py-5 border-b border-gray-200 bg-white">
                           <button
                             onClick={() => handleVerify(seller.email)}
+                            disabled={seller.verified ? true : false}
                             className="inline-block bg-gray-100 text-gray-800 hover:bg-gray-200 md:text-sm font-semibold shadow text-center rounded-lg outline-none transition duration-100 px-4 py-3"
                           >
-                            Verify
+                            {seller.verified ? "Verified" : "Verify"}
                           </button>
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white">

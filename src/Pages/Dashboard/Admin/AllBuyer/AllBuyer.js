@@ -9,7 +9,7 @@ const AllBuyer = () => {
   const { data: allbuyer = [], refetch } = useQuery({
     queryKey: ["allbuyer"],
     queryFn: async () => {
-      const res = await fetch("https://gamicon-server.vercel.app/allbuyer", {
+      const res = await fetch(`${process.env.REACT_APP_api_url}/allbuyer`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("gamicon-token")}`,
         },
@@ -20,7 +20,7 @@ const AllBuyer = () => {
   });
 
   const handleDelete = (id) => {
-    axios.delete(`https://gamicon-server.vercel.app/user/${id}`).then((res) => {
+    axios.delete(`${process.env.REACT_APP_api_url}/user/${id}`).then((res) => {
       if (res.data.deletedCount) {
         toast.success("Seller deleted successful");
         refetch();

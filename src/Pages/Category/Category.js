@@ -30,15 +30,14 @@ const Category = () => {
   }
 
   const handleReport = (id) => {
-    axios
-      .patch(`https://gamicon-server.vercel.app/report/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.modifiedCount) {
-          toast.success("Product reported successful");
-        }
-      });
+    axios.patch(`${process.env.REACT_APP_api_url}/report/${id}`).then((res) => {
+      if (res.data.modifiedCount) {
+        toast.success("Product reported successful");
+      }
+    });
   };
+
+  console.log(products);
 
   return (
     <div>

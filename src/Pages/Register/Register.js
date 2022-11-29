@@ -1,6 +1,6 @@
 import { RadioGroup } from "@headlessui/react";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,11 +26,17 @@ const Register = () => {
   const navigate = useNavigate();
   const [token] = useToken(email);
 
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
+
   const onSubmit = (data) => {
     setAuthError("");
     setLoading(true);
 
-    // // Add image to imgbb
+    // Add image to imgbb
     const imgbbKey = process.env.REACT_APP_imgbb_apiKey;
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -55,7 +61,6 @@ const Register = () => {
                   console.log("User name, image added");
                   toast.success("Registration successful");
                   SaveUserToDb(user, role, setEmail);
-                  navigate("/");
                 })
                 .catch((err) => {
                   setAuthError(err);
@@ -77,7 +82,6 @@ const Register = () => {
         toast.success("Registration successful");
         setEmail(user?.email);
         SaveUserToDb(user, "buyer");
-        navigate("/");
       })
       .catch((err) => {
         setAuthError(err);
