@@ -7,7 +7,7 @@ import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import "./DashBoardLayout.css";
 
 const DashboardLayout = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
 
   const [role, roleLoading] = useRole();
 
@@ -22,8 +22,26 @@ const DashboardLayout = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 w-screen h-screen">
               <div className="m-4 flex flex-col justify-between rounded-xl bg-white p-4 sm:p-8">
                 <ul className="space-y-3">
-                  <li className="flex justify-center font-medium text-2xl text-gray-700 p-3 rounded-lg">
-                    __<span className="capitalize">{role}</span>__
+                  <li className="flex font-medium text-2xl text-gray-700 pb-2 rounded-lg">
+                    <div class="rounded-2xl bg-gray-100 p-3">
+                      <div class="flex-row gap-4 flex justify-center items-center">
+                        <div class="flex-shrink-0">
+                          <img
+                            alt="profile"
+                            src={user?.photoURL}
+                            class="mx-auto object-cover rounded-lg h-16 w-16 "
+                          />
+                        </div>
+                        <div class=" flex flex-col">
+                          <span class="text-xl font-medium text-gray-700 capitalize">
+                            {user?.displayName}
+                          </span>
+                          <span class="text-sm text-gray-600 capitalize">
+                            {role}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </li>
                   {role === "buyer" && (
                     <NavLink

@@ -95,10 +95,10 @@ const Category = () => {
                       </div>
                       <div className="mb-4 md:mb-6">
                         <span className="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
-                          Years of use
+                          Phone number
                         </span>
                         <div className="text-xl font-bold capitalize">
-                          {product.yearsOfUse}
+                          {product.phoneNumber}
                         </div>
                       </div>
                       <div className="mb-4 md:mb-6">
@@ -119,10 +119,10 @@ const Category = () => {
                       </div>
                       <div className="mb-4 md:mb-6">
                         <span className="inline-block text-gray-500 text-sm md:text-base font-semibold mb-2">
-                          Phone number
+                          Years of use
                         </span>
                         <div className="text-xl font-bold capitalize">
-                          {product.phoneNumber}
+                          {product.yearsOfUse}
                         </div>
                       </div>
                       <div className="mb-4 md:mb-6">
@@ -169,7 +169,7 @@ const Category = () => {
                         )}
                       </div>
                       <h1> </h1>
-                      <h1 className="text-end text-gray-600 text-sm font-medium">
+                      <h1 className="md:text-end mt-2 md:mt-0 text-gray-600 text-sm font-medium">
                         Posted on: {product.postedTime}
                       </h1>
                     </div>
