@@ -17,11 +17,11 @@ Password: `adminn`
 - A MERN Stack product reselling application
 - Dedicated dashboard for admins, sellers, and buyers
 - Payment integration with Stripe
+- User authentication by Firebase
 - Can buy available consoles
 - Can post to sell consoles
 - Can advertise for available consoles
 - If want can report about consoles
-- Google & Email Authentication
 - Easy to navigate
 - Responsive
 
