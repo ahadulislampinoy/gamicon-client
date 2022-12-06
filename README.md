@@ -18,6 +18,7 @@ Password: `adminn`
 - Dedicated dashboard for admins, sellers, and buyers
 - Payment integration with Stripe
 - User authentication by Firebase
+- Identify authenticated users by Jwt
 - Can buy available consoles
 - Can post to sell consoles
 - Can advertise for available consoles
