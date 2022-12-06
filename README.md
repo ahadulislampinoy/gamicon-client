@@ -14,9 +14,9 @@ Password: `adminn`
 
 ## Features
 
-- A MERN Stack product reselling application.
+- A MERN Stack product reselling application
 - Dedicated dashboard for admins, sellers, and buyers
-- Payment integration with Stripe, etc
+- Payment integration with Stripe
 - Can buy available consoles
 - Can post to sell consoles
 - Can advertise for available consoles
