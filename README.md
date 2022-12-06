@@ -14,7 +14,6 @@ Password: `adminn`
 
 ## Features
 
-- A MERN Stack product reselling application
 - Dedicated dashboard for admins, sellers, and buyers
 - Payment integration with Stripe
 - User authentication by Firebase
