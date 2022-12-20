@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../contexts/AuthProvider";
+import { AuthContext } from "../../../../contexts/AuthProvider";
 import PaymentModal from "./PaymentModal";
 
 const MyOrders = () => {

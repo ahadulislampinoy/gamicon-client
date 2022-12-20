@@ -6,7 +6,7 @@ import Category from "../Pages/Category/Category";
 import AllBuyer from "../Pages/Dashboard/Admin/AllBuyer/AllBuyer";
 import AllSeller from "../Pages/Dashboard/Admin/AllSeller/AllSeller";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems/ReportedItems";
-import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
+import MyOrders from "../Pages/Dashboard/Buyer/MyOrders/MyOrders";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
 import MyProducts from "../Pages/Dashboard/Seller/MyProducts/MyProducts";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";

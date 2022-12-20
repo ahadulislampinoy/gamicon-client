@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import SmallSpinner from "../../../components/Loader/SmallSpinner";
+import SmallSpinner from "../../../../components/Loader/SmallSpinner";
 
 const CheckoutForm = ({ bookingData, refetch }) => {
   const [cardError, setCardError] = useState("");
