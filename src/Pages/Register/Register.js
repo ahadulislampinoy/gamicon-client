@@ -142,6 +142,7 @@ const Register = () => {
                       id="dropzone-file"
                       type="file"
                       className="hidden"
+                      accept="image/x-png,image/jpg,image/jpeg"
                       onInputCapture={(e) =>
                         setImgUrl(e.target.value.slice(12))
                       }

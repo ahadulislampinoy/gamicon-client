@@ -3,7 +3,7 @@ import React from "react";
 const OurApps = () => {
   return (
     <div>
-      <section className="py-6 text-gray-900">
+      <section className="py-6 lg:pt-12 lg:pb-6 text-gray-900">
         <div className="mx-auto flex flex-col justify-between px-8 lg:px-14 py-2 text-center lg:flex-row">
           <div className="flex flex-col justify-center lg:text-left">
             <p className="mb-1 text-sm font-medium tracking-widest uppercase text-green-600">

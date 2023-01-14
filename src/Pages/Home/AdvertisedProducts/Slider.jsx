@@ -17,7 +17,7 @@ export function Slider({ advertisedProducts }) {
       {advertisedProducts.map((product) => (
         <SplideSlide key={product._id}>
           <div className="md:h-80 flex flex-col sm:flex-row bg-gray-100 text-gray-800 rounded-lg overflow-hidden ">
-            <div className="w-full sm:w-1/2 lg:w-2/5 flex flex-col p-4 sm:p-6 justify-between">
+            <div className="w-full sm:w-1/2 lg:w-2/5 flex flex-col p-4 sm:p-5 sm:pt-8 justify-between">
               <div className="flex justify-between items-center sm:block">
                 <h2 className="text-2xl lg:text-4xl font-bold mb-4">
                   {product.productName}

@@ -2,6 +2,8 @@
 
 A gaming console reselling website, Where a buyer can buy gaming consoles, sellers can post about their gaming consoles for sale, and the admin can handle reports, seller and buyers activities.
 
+<img src="./src/assets/Gamicon.png" alt="Home - Gamicon">
+
 ## Live Link
 
 Hosted in Firebase -> [Gamicon](https://gamiconn.web.app/)

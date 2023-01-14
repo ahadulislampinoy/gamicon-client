@@ -76,15 +76,12 @@ const Login = () => {
                     htmlFor="email"
                     className="inline-block text-gray-800 text-sm sm:text-base  mt-3 mb-1"
                   >
-                    Email -{" "}
-                    <span className="italic">
-                      admin access info on placeholder
-                    </span>
+                    Email
                   </label>
                   <input
                     name="email"
                     type="email"
-                    placeholder="admin@gmail.com"
+                    placeholder="Enter email"
                     {...register("email", { required: true })}
                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                   />
@@ -103,7 +100,7 @@ const Login = () => {
                     name="password"
                     type="password"
                     {...register("password", { required: true })}
-                    placeholder="adminn"
+                    placeholder="Enter password"
                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-gray-100 rounded outline-none transition duration-100 px-3 py-2"
                   />
                   {errors?.password && (
